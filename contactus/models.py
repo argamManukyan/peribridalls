@@ -80,11 +80,13 @@ class WorkingHours(models.Model):
     name = models.CharField(max_length=120, unique=True,
                             verbose_name="Ժամանակահատված",
                             help_text="Օր.՝ 12:00 - 15:00")
+    my_order = models.PositiveIntegerField(default=0, verbose_name='Դասավորել')
 
     def __str__(self):
         return self.name
 
     class Meta:
+        ordering = ['my_order']
         verbose_name = 'Ամրագրման ժամ'
         verbose_name_plural = 'Ամրագրման ժամեր'
 

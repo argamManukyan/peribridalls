@@ -6,7 +6,7 @@ from easy_select2 import select2_modelform
 
 from .models import *
 
-# footerForm = select2_modelform(FooterItems)
+footerForm = select2_modelform(FooterItems)
 
 
 @admin.register(CompanyInformation)
@@ -28,11 +28,11 @@ class FooTerCategoryAdmin(SortableAdminMixin, TabbedDjangoJqueryTranslationAdmin
 
 
 @admin.register(FooterItems)
-class FooterItemsAdmin(SortableAdminMixin,TabbedDjangoJqueryTranslationAdmin):
-    # form = footerForm
-    pass
+class FooterItemsAdmin(SortableAdminMixin, TabbedDjangoJqueryTranslationAdmin):
+    form = footerForm
+
 
 @admin.register(SocialShareButtons)
-class SocialShareButtonsAdmin(SortableAdminMixin,admin.ModelAdmin):
+class SocialShareButtonsAdmin(SortableAdminMixin, admin.ModelAdmin):
     pass
 

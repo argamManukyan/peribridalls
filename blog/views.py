@@ -14,7 +14,6 @@ def blog_category(request, slug):
     paginator = Paginator(posts, settings.PAGE_SIZE_FOR_BLOG)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
-    print(len(page_obj.object_list))
     context = {
         "category": category,
         "categories": categories,

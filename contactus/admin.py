@@ -1,4 +1,4 @@
-# from adminsortable2.admin import SortableAdminMixin
+from adminsortable2.admin import SortableAdminMixin
 from django.contrib import admin
 from modeltranslation.admin import TranslationInlineModelAdmin, TabbedDjangoJqueryTranslationAdmin
 from singlemodeladmin import SingleModelAdmin
@@ -26,5 +26,8 @@ class BookingsAdmin(admin.ModelAdmin):
     list_display = ['name', 'phone', 'date_of_book', 'time_of_pick']
 
 
+class WHrsAdmin(SortableAdminMixin, admin.ModelAdmin):
+    pass
 
-admin.site.register(WorkingHours)
+
+admin.site.register(WorkingHours, WHrsAdmin)
