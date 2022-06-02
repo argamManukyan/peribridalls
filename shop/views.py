@@ -33,12 +33,15 @@ def brand_list(request):
 
 def products_list(request):
     products = Product.objects.all()
-    products_sort = sorted(products)
 
-    page_obj = paginated_response(request, products)
+    page_obj = filter_products(request, products)
     colors = Color.objects.all()
     categories = Category.objects.all()
     brands = Brand.objects.all()
+
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+        return show_filter_data(request, products)
+
     filter_fields = FilterField.objects.filter(Q(show_in_filters=True),
                                                Q(productfeature__value__isnull=False)).distinct()
 
