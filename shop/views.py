@@ -82,7 +82,7 @@ def brand_details(request, slug):
     products = Product.objects.filter(brand=brand)
     page_obj = paginated_response(request, products)
 
-    if request.GET.keys():
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         return show_filter_data(request, products)
 
     context = {
@@ -173,10 +173,10 @@ def category_details(request, slug):
     colors = Color.objects.filter().distinct()
     brands = Brand.objects.all()
     products = Product.objects.filter(category__in=category.get_family().values_list('id', flat=True))
-    page_obj = paginated_response(request, products)
+    page_obj = filter_products(request, products)
     categories = Category.objects.filter(parent=None)
 
-    if list(request.GET.keys()):
+    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         return show_filter_data(request, products)
 
     context = {
