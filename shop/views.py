@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
+from django.views.decorators.cache import never_cache
 from about.models import AboutUsHomepage, AboutUsBanner
 from blog.models import Blog
 from breadcrumbs.models import BreadcrumbTexts
@@ -56,6 +57,7 @@ def products_list(request):
 
     return render(request, 'product_list.html', context)
 
+
 def category_list(request):
     st_content: BreadcrumbTexts = BreadcrumbTexts.objects.filter(location='categories').first()
     categories = Category.objects.filter(parent=None)
@@ -63,6 +65,7 @@ def category_list(request):
     return render(request, 'all_categories.html', context)
 
 
+@never_cache
 def brand_details(request, slug):
     brand = get_object_or_404(Brand, slug=slug)
     categories = Category.objects.filter(parent=None)
@@ -155,6 +158,7 @@ def show_filter_data(request, products):
     return JsonResponse(data)
 
 
+@never_cache
 def category_details(request, slug):
     category = get_object_or_404(Category, slug=slug)
 
