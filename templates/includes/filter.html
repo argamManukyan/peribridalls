@@ -18,11 +18,11 @@
                              alt="Filters"><span>{% trans 'Filters' %}</span>
                     </h3>
                 </div>
-                {{ request.resolver_match }}
+
                 <form method="get" class="filters-marani" id="allFilter"
                       onchange="filter()">
 
-                    {% if request.resolver_match.kwargs.url_name != 'brand_details' %}
+                    {% if request.resolver_match.url_name != 'brand_details' %}
 
                     {% if brands %}
                         <div class="filter-params">
