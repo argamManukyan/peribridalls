@@ -7,7 +7,7 @@ import shop.views
 from wish.views import add_to_wish
 
 urlpatterns = [
-    re_path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     re_path('add_to_wish/', add_to_wish, name='add_to_wish'),
     re_path('ckeditor/', include('ckeditor_uploader.urls')),
     re_path('rosetta/', include('rosetta.urls')),

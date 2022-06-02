@@ -10,7 +10,7 @@ from .models import *
 
 
 @admin.register(CompanyInformation)
-class CompanyInformationAdmin(TabbedDjangoJqueryTranslationAdmin):
+class CompanyInformationAdmin(SortableAdminMixin, TabbedDjangoJqueryTranslationAdmin):
     list_display = ['id', 'text']
 
     def get_icon(self, obj):
@@ -23,16 +23,16 @@ class CompanyInformationAdmin(TabbedDjangoJqueryTranslationAdmin):
 
 
 @admin.register(FooTerCategory)
-class FooTerCategoryAdmin(TabbedDjangoJqueryTranslationAdmin):
+class FooTerCategoryAdmin(SortableAdminMixin, TabbedDjangoJqueryTranslationAdmin):
     pass
 
 
 @admin.register(FooterItems)
-class FooterItemsAdmin(TabbedDjangoJqueryTranslationAdmin):
+class FooterItemsAdmin(SortableAdminMixin,TabbedDjangoJqueryTranslationAdmin):
     # form = footerForm
     pass
 
 @admin.register(SocialShareButtons)
-class SocialShareButtonsAdmin(admin.ModelAdmin):
+class SocialShareButtonsAdmin(SortableAdminMixin,admin.ModelAdmin):
     pass
 
