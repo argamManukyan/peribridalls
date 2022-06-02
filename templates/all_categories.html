@@ -1,0 +1,91 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='viewport'
+          content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <title>{% trans 'All Categories' %} | {{ request.get_host|capfirst }}</title>
+    <meta name="Description" content="">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/pb_color.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pb_style.css' %}">
+</head>
+
+<body>
+
+<div id="root">
+    {% include 'includes/header.html' %}
+    <!-- Main content -->
+    <main id="content" class="about-us">
+
+        <!-- Breadcrumbs -->
+        <section class="bread-bg" style="background-image:url(
+                {% if st_content.breadcrumbs_image %}{{ st_content.breadcrumbs_image.url }}{% else %}{% static 'img/breadcrumbs.jpg' %}{% endif %})">
+            <div class="cnt">
+                <div class="row">
+                    <div class="col">
+                        <div id="breadcrumbss" class="anothers-bread text-center">
+                            <div class="tit-page bread-page">
+                                <h1>{% if st_content.page_title %}{{ st_content.page_title }}{% else %}
+                                    {% trans 'Categories' %}{% endif %}</h1>
+                                {% if st_content.breadcrumbs_text %}
+                                    <p>{{ st_content.breadcrumbs_text|safe }}</p>{% endif %}
+                            </div>
+                            <nav id="breadcrumbs" class="flex-content-center">
+                                <ul class="breadcrumbs-list align-items-center">
+                                    <li class="b-list-item">
+                                        <a href="{% url 'shop:home_page' %}" class="b-list-link">{% trans 'Home' %}</a>
+                                    </li>
+                                    <span class="bread-arrow">→</span>
+                                    <li class="b-list-item">
+                                        <span>{% trans 'Categories' %}</span>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Breadcrumbs end -->
+
+        <!-- Brands -->
+        <section class="section brand-page">
+            <div class="cnt">
+                <div class="row">
+                    {% for category in categories %}
+                        <div class="col col-3">
+                            <div class="home-cat-block">
+                                <figure>
+                                    <img src="{% if category.image %}{{ category.image.url }}{% else %}{% static 'img/home-cat-1.jpg' %}{% endif %}"
+                                         alt="{{ category.name }}">
+                                </figure>
+                                <div class="home-cat-caption">
+                                    <h3><a href="{{ category.get_absolute_url }}">{{ category.name|title }}</a></h3>
+                                    <a href="{{ category.get_absolute_url }}"
+                                       class="button normal trans">{% trans 'See more' %}
+                                        <img src="{% static 'img/icons/b-arr.svg' %}" alt="{% trans 'See more' %}"></a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% include 'includes/pagination.html' %}
+                </div>
+            </div>
+        </section>
+        <!-- Brands end -->
+    </main>
+    <!-- Main content end -->
+    {% include 'includes/footer.html' %}
+</div>
+
+<script src="{% static 'js/pb3.6_main.js' %}"></script>
+<script src="{% static 'js/pb_script.js' %}"></script>
+
+</body>
+
+</html>

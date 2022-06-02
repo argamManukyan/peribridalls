@@ -1,0 +1,119 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <title>{% if post.meta_title %}{{ post.meta_title }}{% else %}{{ post.name|capfirst }} | {{ request.get_host|capfirst }}{% endif %}</title>
+    <meta name="Description" content="{% if post.meta_description %}{{ post.meta_description }}{% endif %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet"    href="{% static 'css/pb_color.css' %}">
+    <link rel="stylesheet"    href="{% static 'css/pb_style.css' %}">
+</head>
+
+<body>
+
+   <div id="root">
+    {% include 'includes/header.html' %}
+    <!-- Main content -->
+    <main id="content" class="about-us">
+       
+        <!-- Breadcrumbs -->
+        <section class="bread-bg no-p" style="background-image:url({% if post.image %}{{ post.image.url }}{% else %}{% static 'img/breadcrumbs.jpg' %}{% endif %})">
+               <div class="cnt">
+                   <div class="row">
+                       <div class="col">
+                           <div id="breadcrumbss" class="anothers-bread text-center">
+                             <div class="tit-page bread-page">
+                                 <h1>{{ post.name|capfirst }}</h1>
+                             </div>
+                             <nav id="breadcrumbs" class="flex-content-center">
+                                <ul class="breadcrumbs-list align-items-center">
+                                    <li class="b-list-item">
+                                        <a href="{% url 'shop:home_page' %}" class="b-list-link">{% trans 'Home' %}</a>
+                                    </li>
+                                    <span class="bread-arrow">→</span>
+                                    <li class="b-list-item">
+                                        <a href="{% url 'blog_list' %}" class="b-list-link">{% trans 'Blog' %}</a>
+                                    </li>
+                                    <span class="bread-arrow">→</span>
+                                    <li class="b-list-item">
+                                        <a href="{{ post.category.get_absolute_url }}" class="b-list-link">{{ post.category.name }}</a>
+                                    </li>
+                                    <span class="bread-arrow">→</span>
+                                    <li class="b-list-item">
+                                        <span>{{ post.name|capfirst }}</span>
+                                    </li>
+                                </ul>
+                            </nav>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+           </section>
+        <!-- Breadcrumbs end -->
+        
+                      
+        <!-- Ck editor text -->
+        <div class="all-paragraphs-styles">
+            <div class="cnt">
+                <div class="row">
+                  
+                   <div class="col">
+                       <div class="post-details align-items-center">
+                           <div class="post-date align-items-center">
+                               <img src="{% static 'img/icons/calendar-black.svg' %}" alt="Add date">
+                               {{ post.created|date:"Y-m-d | H:i" }}
+                           </div>
+                           <div class="post-views align-items-center">
+                               <img src="{% static 'img/icons/eye-black.svg' %}" alt="Views">{{ post.views_count }}
+                           </div>
+                       </div>
+                   </div>
+                   
+                    <div class="col">{% if post.large_text %}{{ post.large_text|safe }}{% endif %}</div>
+                </div>
+            </div>
+        </div>
+        <!-- Ck editor text end -->
+        {% if related_posts %}
+        <section class="section blog-home">
+           <div class="cnt">
+               <div class="row">
+                   <div class="col">
+                       <div class="title-section text-center">
+                            <h3>
+                                <a href="{% url 'blog_list' %}">{% trans 'Blog' %}
+                                    <img src="{% static 'img/icons/title-arr.svg' %}" alt="{% trans 'See more' %}"></a>
+                            </h3>
+                        </div>
+                   </div>
+                   <div class="col col-2">
+                       {% include 'includes/blog.html' %}
+                   </div>
+                   
+                   <div class="col">
+                       <div class="see-all-butt">
+                           <a href="{% url 'blog_list' %}" class="button normal trans black">{% trans 'See All' %}
+                               <img src="{% static 'img/icons/black-arr.svg' %}" alt="{% trans 'See All' %}"></a>
+                       </div>
+                   </div>
+                   
+               </div>
+           </div>
+        </section>
+        <!-- Blog end -->
+        {% endif %}
+    </main>
+    {% include 'includes/footer.html' %}
+   </div>
+   
+    <script src="{% static 'js/pb3.6_main.js' %}"></script>
+    <script src="{% static 'js/pb_script.js' %}"></script>
+    
+</body>
+
+</html>

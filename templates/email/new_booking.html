@@ -1,0 +1,6 @@
+<p>Անուն: {{ name }}</p>
+<p>Հեռ.:  {{ phone }}</p>
+<p>Օր: {{ date_of_book|date:"d-m-y" }}</p>
+{% if time_of_pick %}
+<p>Ժամ: {{ time_of_pick }}</p>
+{% endif %}

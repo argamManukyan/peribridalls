@@ -1,0 +1,92 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <title>404 {% trans 'Page Not Found' %}</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet"    href="{% static 'css/pb_color.css' %}">
+    <link rel="stylesheet"    href="{% static 'css/pb_style.css' %}">
+    <style>
+        header,
+        .nav-offcanvas-menu ul li ul {
+            background: rgba(93, 88, 92) !important;
+        }
+
+        #breadcrumbs {
+            margin: 100px 0 25px;
+        }
+
+        @media (max-width: 767.5px) {
+            #breadcrumbs {
+                margin: 85px 0 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+   <div id="root">
+    {% include 'includes/header.html' %}
+    <!-- Main content -->
+    <main id="content" class="product-page">
+
+        <!-- Breadcrumbs -->
+          <nav id="breadcrumbs">
+                <div class="cnt">
+                    <div class="row">
+                        <div class="col">
+                            <ul class="breadcrumbs-list align-items-center">
+                                <li class="b-list-item">
+                                    <a href="#" class="b-list-link">Home</a>
+                                </li>
+                                <span class="bread-arrow">→</span>
+                                <li class="b-list-item">
+                                    <span>Page Not Found</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        <!-- Breadcrumbs end -->
+
+        <!-- 404 pages -->
+        <section class="section page-note">
+            <div class="cnt">
+                <div class="row">
+                    <div class="col">
+                        <div class="not-found text-center">
+                            <div class="error-inner">
+                                <div class="error-container">
+                                    <div class="error-page">
+                                        <h2 class="error-title flex-content-center">404</h2>
+                                        <h5>Page Not Found</h5>
+                                        <p>Check the accuracy of the URL.<br> If you are confident in your actions, contact us. <b> info@peribridals.am</b></p>
+                                        <div><a href="#" class="button normal dark">Go To Home</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 404 end -->
+        
+    </main>
+    {% include 'includes/footer.html' %}
+   </div>
+   
+    <script src="{% static 'js/pb3.6_main.js' %}"></script>
+    <script src="{% static 'js/pb_script.js' %}"></script>
+
+</body>
+
+</html>

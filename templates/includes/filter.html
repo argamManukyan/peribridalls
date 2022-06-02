@@ -1,0 +1,123 @@
+{% load i18n %}
+{% load static %}
+{% load unique %}
+<div class="nav-offcanvas-filter">
+    <div class="filter_menu_container">
+        <div class="filter_menu_content">
+            <div class="filter-header d-none">
+                <div class="widget-heading flex-center-between">
+                    <span class="widget-title">{% trans 'Ֆիլտրեր' %}</span>
+                    <img src="{% static 'img/icons/catalog-close.svg' %}" id="offFilterClose"
+                         class="close" alt="{% trans 'Փակել' %}">
+                </div>
+            </div>
+            <div class="filter-widget-content">
+                <div class="params-on-tit m-none">
+                    <h3>
+                        <img src="{% static 'img/icons/filter.svg' %}"
+                             alt="Filters"><span>{% trans 'Ֆիլտրեր' %}</span>
+                    </h3>
+                </div>
+                <form method="get" class="filters-marani" id="allFilter"
+                      onchange="filter()">
+                    {% if request.resolver_match.kwargs.url_name != 'brand_details' %}
+                    {% if brands %}
+                        <div class="filter-params">
+                            <div class="filter-params-title">
+                                <h4 class="filter-params-hint flex-center-between">{% trans 'Բրենդ' %}
+                                    <img src="{% static 'img/icons/cat-down.svg' %}" class="cat-left border-icons">
+                                </h4>
+                            </div>
+                            <div class="filter-params-content">
+                                {% for brand in brands %}
+                                    <div class="box-list">
+                                        <label class="checkbox-design align-items-center">
+                                            <input
+                                                    type="checkbox"
+                                                    class="color check"
+                                                    value="{{ brand.id }}"
+                                                    id="id_colors_{{ forloop.counter }}"
+                                                    name="brands"
+                                                    {% for k,v in request.GET.lists %}
+                                                        {% if brand.id in v and k == 'brands' %}
+                                                    checked
+                                                        {% endif %}
+                                                    {% endfor %}
+                                            >
+                                            <span class="checkbox-square"></span>
+                                            {{ brand.name }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% endif %}
+                    {% if colors %}
+                        <div class="filter-params">
+                            <div class="filter-params-title">
+                                <h4 class="filter-params-hint flex-center-between">{% trans 'Գույն' %}
+                                    <img src="{% static 'img/icons/cat-down.svg' %}" class="cat-left border-icons">
+                                </h4>
+                            </div>
+                            <div class="filter-params-content">
+                                {% for color in colors %}
+                                    <div class="box-list">
+                                        <label class="checkbox-design align-items-center">
+                                            <input
+                                                    type="checkbox"
+                                                    class="color check"
+                                                    value="{{ color.id }}"
+                                                    id="id_colors_{{ forloop.counter }}"
+                                                    name="color"
+                                                    {% for k,v in request.GET.lists %}
+                                                        {% if color.id in v %}
+                                                    checked
+                                                        {% endif %}
+                                                    {% endfor %}
+                                            >
+                                            <span class="checkbox-square"></span>
+                                            <span class="color-type" style="background-color:{{ color.color_code }}">
+                                        </span>{{ color.title }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% for field in filter_fields %}
+                        <div class="filter-params">
+                            <div class="filter-params-title">
+                                <h4 class="filter-params-hint flex-center-between">{{ field.title }}
+                                    <img src="{% static 'img/icons/cat-down.svg' %}" class="cat-left border-icons">
+                                </h4>
+                            </div>
+                            <div class="filter-params-content">
+                                {% for feat_val in field.productfeature_set.all|unique %}
+
+                                    <div class="box-list">
+                                        <label class="checkbox-design align-items-center">
+                                            <input
+                                                type="checkbox"
+                                                class="color check"
+                                                value="{{ feat_val.title_en }}"
+                                                {% for k,v in request.GET.lists %}
+                                                    {% if feat_val.title_en in v %}
+                                                checked{% endif %}
+                                                {% endfor %}
+                                                id="{{ forloop.counter }}__{{ field.filter_key }}"
+                                                name="{{ field.filter_key }}">
+                                            <span class="checkbox-square"></span>{{ feat_val }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="filter_menu_overlay"></div>

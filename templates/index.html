@@ -1,0 +1,319 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='viewport'
+          content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <title>{% trans 'Home Page' %} | {{ request.get_host|capfirst }}</title>
+    <meta name="Description" content="">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/pb_swiper.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pb_color.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pb_style.css' %}">
+</head>
+
+<body>
+
+<div id="root">
+    {% include 'includes/header.html' %}
+    <!-- Main content -->
+    <main id="content" class="">
+
+        <!-- Slider -->
+        <section class="home-slider">
+
+            <div class="swiper-container main-slider">
+                <div class="swiper-wrapper">
+                    {% for slide in slider %}
+                        {% if forloop.first %}
+                            {% include 'includes/slider_item.html' %}
+                        {% else %}
+                            {% include 'includes/slider_item.html' %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next xl-none"></div>
+                <div class="swiper-button-prev xl-none"></div>
+            </div>
+
+        </section>
+        <!-- Slider end-->
+
+        <!-- Home cats-->
+        <section class="section home-cats">
+            <div class="cnt">
+                <div class="row">
+                    <div class="col">
+                        <div class="title-section text-center">
+                            <h3>
+                                <a href="{% url 'shop:brand_list' %}">{% trans 'Peri Bridals presents' %}
+                                    <img src="{% static 'img/icons/title-arr.svg' %}"
+                                         alt="{% trans 'See more' %}"></a>
+                            </h3>
+                        </div>
+                    </div>
+                    {% for category in categories %}
+                    <div class="col col-3">
+                        <div class="home-cat-block">
+                            <figure>
+                                <img src="{% if category.image %}{{ category.image.url }}{% else %}{% static 'img/home-cat-1.jpg' %}{% endif %}" alt="{{ category.name }}">
+                            </figure>
+                            <div class="home-cat-caption">
+                                <h3><a href="{{ category.get_absolute_url }}">{{ category.name|title }}</a></h3>
+                                <a href="{{ category.get_absolute_url }}" class="button normal trans">{% trans 'See more' %}
+                                    <img src="{% static 'img/icons/b-arr.svg' %}" alt="{% trans 'See more' %}"></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <!-- Home cats end-->
+
+        {% if about_home %}
+            <!-- Home about-->
+            <section class="section home-ab">
+                <div class="cnt">
+                    <div class="row align-items-center">
+                        <div class="col col-2">
+                            <figure class="ab-home-img">
+                                <img src="{% if about_home.image %}{{ about_home.image.url }}{% else %}{% static 'img/home-about.jpg' %}{% endif %}"
+                                     alt="Peri Bridals">
+                            </figure>
+                        </div>
+                        <div class="col col-2">
+                            <div class="ab-home-text">
+                                {% if about_home.text %}
+                                    {{ about_home.text|safe }}
+                                {% endif %}
+                                <div class="ab-home-but">
+                                    <a href="{% url 'about_us' %}"
+                                       class="button normal trans black">{% trans 'Learn More' %}
+                                        <img src="{% static 'img/icons/black-arr.svg' %}"
+                                             alt="{% trans 'Learn More' %}"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Home about end-->
+        {% endif %}
+        {% if brands %}
+            <!-- Home Brand-->
+            <section class="section brands">
+                <div class="cnt">
+                    <div class="row">
+                        <div class="col">
+                            <div class="title-section text-center">
+                                <h3>
+                                    <a href="{% url 'shop:brand_list' %}">{% trans 'Brands' %}
+                                        <img src="{% static 'img/icons/title-arr.svg' %}"
+                                             alt="{% trans 'See more' %}">
+                                    </a>
+                                </h3>
+                            </div>
+                        </div>
+                        {% for brand in brands %}
+                            <div class="col col-3">
+                                <div class="brand-block">
+                                    <div class="brand-line"></div>
+                                    <a href="{{ brand.get_absolute_url }}"
+                                       class="brand-name">{{ brand.name }}</a>
+                                    <figure>
+                                        <img
+                                                src="{% if brand.image %}{{ brand.image.url }}{% else %}{% static 'img/brand.jpg' %}{% endif %}"
+                                                alt="{{ brand.name }}">
+                                    </figure>
+                                    <div class="brand-link">
+                                        <a href="{{ brand.get_absolute_url }}">{% trans 'View' %}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="col">
+                            <div class="see-all-butt">
+                                <a href="{% url 'shop:brand_list' %}"
+                                   class="button normal trans black">{% trans 'See All' %}
+                                    <img src="{% static 'img/icons/black-arr.svg' %}" alt="{% trans 'See All' %}"></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+        <!-- Home Brand end -->
+        {% if banner %}
+            <!-- Adv Block -->
+            <section class="section adv">
+                <div class="adv-block" style="background-image: url(
+                        {% if banner.image %}{{ banner.image.url }}{% else %}{% static 'img/adv.jpg' %}{% endif %})">
+                    <div class="adv-text">
+                        {% if banner.text %}
+                            {{ banner.text|safe }}
+                        {% endif %}
+                        {% if banner.url %}
+                            <div class="adv-but">
+                                <a href="{{ banner.url }}">{% trans 'Learn More' %}</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+            <!-- Adv Block end -->
+        {% endif %}
+        {% if posts %}
+            <!-- Blog home-->
+            <section class="section blog-home">
+                <div class="cnt">
+                    <div class="row">
+                        <div class="col">
+                            <div class="title-section text-center">
+                                <h3>
+                                    <a href="{% url 'blog_list' %}">{% trans 'Blog' %}
+                                        <img src="{% static 'img/icons/title-arr.svg' %}"
+                                             alt="{% trans 'See more' %}">
+                                    </a>
+                                </h3>
+                            </div>
+                        </div>
+                        {% for post in posts %}
+                            <div class="col col-2">
+                                {% include 'includes/blog.html' %}
+                            </div>
+                        {% endfor %}
+
+                        <div class="col">
+                            <div class="see-all-butt">
+                                <a href="{% url 'blog_list' %}" class="button normal trans black">{% trans 'See All' %}
+                                    <img src="{% static 'img/icons/black-arr.svg' %}" alt="{% trans 'See All' %}"></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <!-- Blog home end -->
+        {% endif %}
+        <!-- Appointment -->
+        <section class="section" id="appointment">
+            <div class="cnt">
+                <div class="row">
+                    <div class="col">
+                        <div class="title-section text-center">
+                            <h3>
+                                <a href="javascript:void(0);">{% trans 'Book Your Appointment' %}</a>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="col">
+
+                        <form id="bookApp" action="" method="post">
+                            {% include 'includes/message.html' %}
+                            <div>
+                                <div class="two-inputs flex-center-between">
+                                    <div class="input-fields all-auth">
+                                        <label for="name">{% trans 'Name & Surname' %} * </label>
+                                        <input type="text" id="name" name="name" value=""
+                                               placeholder="Ani Vardanyan"
+                                               autocomplete="off">
+                                    </div>
+                                    <div class="input-fields all-auth">
+                                        <label for="phone">{% trans 'Phone' %} *</label>
+                                        <input type="number" id="phone" name="phone" value=""
+                                               placeholder="+374 99 12 34 56" autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <div class="two-inputs flex-center-between">
+                                    <div class="input-fields all-auth date-pick">
+                                        <label for="date_of_book">{% trans 'Select Date' %} *</label>
+                                        <input type="text" class="text-center" id="datepicker" name="date_of_book"
+                                               placeholder="mm/dd/yyy" autocomplete="off">
+                                    </div>
+
+                                    <div class="input-fields all-auth time-pick">
+                                        <label for="time_of_pick">{% trans 'Select Time' %}</label>
+                                        <select name="time_of_pick" id="shippingtime" class="text-center">
+                                            <option value="select" id="time_of_pick">{% trans 'Select' %}</option>
+                                            {% for w_h in working_hours %}
+                                            <option class="picktimes" value="{{ w_h.id }}">{{ w_h.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="butt-book flex-content-center">
+                                    <button id="book-button" type="submit" class="button big dark">BOOK NOW</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Appointment end -->
+
+    </main>
+    {% include 'includes/footer.html' %}
+</div>
+
+<script src="{% static 'js/pb3.6_main.js' %}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{% static 'js/pb_script.js' %}"></script>
+<script src="{% static 'js/pb_swiper.js' %}"></script>
+<script src="{% static 'js/pb_swiperex.js' %}"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+
+<script>
+    //Deatepicker
+    $(function () {
+        var userLang = navigator.language || navigator.userLanguage;
+        var options = $.extend({},
+            $.datepicker.regional["hy"], {
+                minDate: 0,
+                changeMonth: true,
+                highlightWeek: true,
+                dateFormat: 'yy-mm-dd'
+            }
+        );
+
+        $("#datepicker").datepicker(options);
+    });
+
+    // Validate datepicker
+    $(function () {
+        $('#bookApp').validate({
+            rules: {
+                name: "required",
+                phone: "required",
+                date_of_book: "required"
+            },
+
+            messages: {
+                name: "{% trans 'The field is required' %}",
+                phone: "{% trans 'The field is required' %}",
+                date_of_book: "{% trans 'The field is required' %}"
+            },
+
+            submitHandler: function (form) {
+                $("#book-button").attr("disabled", true);
+                form.submit();
+            }
+        });
+
+    });
+</script>
+
+</body>
+
+</html>

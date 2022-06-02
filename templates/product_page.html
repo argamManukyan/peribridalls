@@ -1,0 +1,272 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='viewport'
+          content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <title>{% if product.meta_title %}{{ product.meta_title }}{% else %}{{ product.name }} |
+        {{ request.get_host|capfirst }}{% endif %}</title>
+    <meta name="Description" content="">
+    <link rel="stylesheet" href="{% static 'css/pb_swiper.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/pb_color.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pb_style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>
+    <style>
+        header,
+        .nav-offcanvas-menu ul li ul {
+            background: rgba(93, 88, 92) !important;
+        }
+
+        #breadcrumbs {
+            margin: 100px 0 25px;
+        }
+
+        @media (max-width: 767.5px) {
+            #breadcrumbs {
+                margin: 85px 0 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root">
+    {% include 'includes/header.html' %}
+    <!-- Main content -->
+    <main id="content" class="product-page">
+
+        <!-- Breadcrumbs -->
+        <nav id="breadcrumbs">
+            <div class="cnt">
+                <div class="row">
+                    <div class="col">
+                        <ul class="breadcrumbs-list align-items-center">
+                            <li class="b-list-item">
+                                <a href="{% url 'shop:home_page' %}" class="b-list-link">{% trans 'Home' %}</a>
+                            </li>
+
+                            {% if product.category %}
+                                <span class="bread-arrow">→</span>
+                                <li class="b-list-item">
+                                    <a href="{{ product.category.get_absolute_url }}"
+                                       class="b-list-link">{{ product.category.name }}</a>
+                                </li>
+                            {% endif %}
+                            {% if product.brand %}
+                                <span class="bread-arrow">→</span>
+                                <li class="b-list-item">
+                                    <a href="{{ product.brand.get_absolute_url }}"
+                                       class="b-list-link">{{ product.brand.name }}</a>
+                                </li>
+                            {% endif %}
+                            <span class="bread-arrow">→</span>
+                            <li class="b-list-item">
+                                <span>{{ product.name|capfirst }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- Breadcrumbs end -->
+
+        <!-- Product page -->
+        <section class="producy-full-page">
+            <div class="cnt">
+                <div class="row">
+                    {% if product.productimage_set.count %}
+                        <div class="col col-2">
+                            <div class="swiper-container-wrapper">
+                                <div class="row aed">
+                                    <div class="col col-prod-slider-2">
+                                        <!-- Slider thumbnail container -->
+                                        <div class="swiper-container gallery-thumbs">
+                                            <div class="swiper-wrapper">
+                                                {% for img in product.productimage_set.all %}
+                                                    {% if forloop.first %}
+                                                        <div class="swiper-slide">
+                                                            <figure>
+                                                                <img src="{{ img.image.url }}" class="cover"
+                                                                     alt="{{ product.name }}">
+                                                            </figure>
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="swiper-slide">
+                                                            <figure>
+                                                                <img src="{{ img.image.url }}" class="cover"
+                                                                     alt="{{ product.name }}">
+                                                            </figure>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col col-prod-slide-8">
+                                        <div class="swiper-container gallery-top">
+                                            <div class="swiper-wrapper">
+                                                <!-- Slides -->
+                                                {% for img in product.productimage_set.all %}
+                                                    <div class="swiper-slide">
+                                                        <a href="{{ img.image.url }}" data-fancybox="images">
+                                                            <figure>
+                                                                <img src="{{ img.image.url }}" alt="Product name">
+                                                            </figure>
+                                                        </a>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                            <!-- Add Arrows -->
+                                            <div class="swiper-pagination"></div>
+                                            <div class="swiper-button-next"></div>
+                                            <div class="swiper-button-prev"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="col col-2">
+                        <div class="all-details">
+                            <div class="pr-name-wish align-items-center">
+                                <div class="pr-name">
+                                    <h1>{{ product.name|capfirst }}</h1>
+                                    {% if product.brand %}
+                                        <div class="pr-brand-name">
+                                            <a href="{{ product.brand.get_absolute_url }}">{{ product.brand.name }}</a>
+                                        </div>{% endif %}
+                                </div>
+                                <div class="pr-wish">
+                                    <button data-product="{{ product.id }}" data-url="{% url 'add_to_wish' %}"
+                                            class="wish-list-icon flex-content-center  addTOWISH-{{ product.id }} {% if product.id in wish_ids %}active{% endif %}"
+                                            onclick="addToWish(this)">
+                                        <svg class="{% if product.id in wish_ids %}active{% endif %}" width="24"
+                                             height="22" viewBox="0 0 24 22" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M23.4193 4.40608C23.047 3.54386 22.51 2.76253 21.8386 2.10582C21.1667 1.44715 20.3745 0.923711 19.505 0.563973C18.6035 0.189466 17.6365 -0.00222744 16.6602 1.95269e-05C15.2906 1.95269e-05 13.9544 0.375062 12.7931 1.08348C12.5153 1.25294 12.2514 1.43907 12.0014 1.64187C11.7513 1.43907 11.4874 1.25294 11.2096 1.08348C10.0484 0.375062 8.71211 1.95269e-05 7.34251 1.95269e-05C6.35628 1.95269e-05 5.40062 0.18893 4.49774 0.563973C3.62542 0.925126 2.83921 1.44463 2.16414 2.10582C1.49183 2.76179 0.95477 3.54331 0.5834 4.40608C0.197245 5.3034 0 6.25629 0 7.23696C0 8.16207 0.188911 9.12606 0.563954 10.1067C0.877878 10.9263 1.32793 11.7764 1.903 12.6348C2.81421 13.9933 4.06713 15.4101 5.62287 16.8464C8.20094 19.2272 10.754 20.8719 10.8624 20.9385L11.5208 21.3608C11.8125 21.5469 12.1875 21.5469 12.4792 21.3608L13.1376 20.9385C13.246 20.8691 15.7963 19.2272 18.3771 16.8464C19.9328 15.4101 21.1858 13.9933 22.097 12.6348C22.672 11.7764 23.1249 10.9263 23.436 10.1067C23.8111 9.12606 24 8.16207 24 7.23696C24.0027 6.25629 23.8055 5.3034 23.4193 4.40608V4.40608ZM12.0014 19.1633C12.0014 19.1633 2.11135 12.8265 2.11135 7.23696C2.11135 4.40608 4.45329 2.11137 7.34251 2.11137C9.3733 2.11137 11.1346 3.24484 12.0014 4.90058C12.8681 3.24484 14.6295 2.11137 16.6602 2.11137C19.5495 2.11137 21.8914 4.40608 21.8914 7.23696C21.8914 12.8265 12.0014 19.1633 12.0014 19.1633Z"
+                                                  fill="white"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                            </div>
+                            <div class="pr-short-desc">
+                                {% if product.short_text %}{{ product.short_text|safe }}{% endif %}
+                            </div>
+                            <div class="pr-appointment ">
+                                <a href="{% url 'contact_us' %}" class="align-items-center">
+                                    <img src="{% static 'img/icons/c-location.svg' %}" alt="Location">
+                                    <span>{% trans 'See our address ' %}</span></a>
+                            </div>
+                            <div class="product-desc">
+                                <div class="desc-list">
+                                    {% if product.large_text %}
+                                        <div class="nav-item active">
+                                            <h2 class="nav-item-inner-heading">
+                                                <p>{% trans 'Product Description' %}</p>
+                                            </h2>
+                                            <div class="nav-sub-list" style="display: block;">
+                                                {{ product.large_text|safe }}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if product.productfeature_set.count %}
+                                    <div class="desc-list">
+
+                                        <div class="nav-item">
+                                            <h2 class="nav-item-inner-heading">
+                                                <p>{% trans 'More Information' %}</p>
+                                            </h2>
+                                            <div class="nav-sub-list">
+                                                <ul class="chars">
+                                                    {% for feature in product.productfeature_set.all %}
+                                                        <li class="align-items-center">
+                                                            <span class="char-name">{{ feature.field.title }}</span>
+                                                            <span class="char-value">{{ feature.value.title }}</span>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div class="desc-list">
+
+                                    <div class="nav-item">
+                                        <h2 class="nav-item-inner-heading">
+                                            <p>{% trans 'Contact Us' %}</p>
+                                        </h2>
+                                        <div class="nav-sub-list">
+                                            <ul class="pr-cont">
+                                                {% for item in contact_details %}
+                                                    <li class="align-items-center">
+                                                    <span class="cont-a">
+                                                        <img src="
+                                                                {% if item.icon %}{{ item.icon.url }}{% else %}{% static 'img/icons/c-phone.svg' %}{% endif %}"
+                                                             alt="Phone">
+                                                    </span>
+                                                        <span class="cont-b">
+                                                        <a href="{% if item.link %}{{ item.link }}{% else %}javascript: void(0){% endif %}">{{ item.text }}</a>
+                                                    </span>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% if others %}
+        <section class="section also-offer">
+            <div class="cnt">
+                <div class="row">
+                    <div class="col">
+                        <div class="swiper-container slider-3">
+                            <div class="title-section text-center">
+                                <h3>
+                                    <a href="javascript: void(0)">{% trans 'YOU MIGHT ALSO LIKE' %}
+                                        <img src="{% static 'img/icons/title-arr.svg' %}"
+                                             alt="See more"></a>
+                                </h3>
+                                <div class="swiper-button-next swiper-next"></div>
+                                <div class="swiper-button-prev swiper-prev"></div>
+                            </div>
+                            <div class="swiper-wrapper">
+                                {% for item in others %}
+                                    <div class="swiper-slide">
+                                        {% include 'includes/product.html' %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+    <!-- Main content end -->
+    {% include 'includes/footer.html' %}
+</div>
+
+<script src="{% static 'js/pb3.6_main.js' %}"></script>
+<script src="{% static 'js/pb_script.js' %}"></script>
+<script src="{% static 'js/pb_swiper.js' %}"></script>
+<script src="{% static 'js/pb_swiperex.js' %}"></script>
+<script src="{% static 'js/wish.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+</body>
+
+</html>

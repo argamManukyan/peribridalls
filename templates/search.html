@@ -1,0 +1,122 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <title>{% trans 'Search' %}</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet"    href="{% static 'css/pb_color.css' %}">
+    <link rel="stylesheet"    href="{% static 'css/pb_style.css' %}">
+    <style>
+        header,
+        .nav-offcanvas-menu ul li ul {
+            background: rgba(93, 88, 92) !important;
+        }
+
+        #breadcrumbs {
+            margin: 100px 0 25px;
+        }
+
+        @media (max-width: 767.5px) {
+            #breadcrumbs {
+                margin: 85px 0 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+   <div id="root">
+    {% include 'includes/header.html' %}
+    <!-- Main content -->
+    <main id="content" class="product-page">
+
+        <!-- Breadcrumbs -->
+          <nav id="breadcrumbs">
+                <div class="cnt">
+                    <div class="row">
+                        <div class="col">
+                            <ul class="breadcrumbs-list align-items-center">
+                                <li class="b-list-item">
+                                    <a href="{% url 'shop:home_page' %}"
+                                       class="b-list-link">{% trans 'Home' %}</a>
+                                </li>
+                                <span class="bread-arrow">→</span>
+                                <li class="b-list-item">
+                                    <a href="{% url 'shop:search' %}" class="b-list-link">{% trans 'Search' %}</a>
+                                </li>
+                                {% if q %}
+                                <span class="bread-arrow">→</span>
+                                <li class="b-list-item">
+                                    <span>{{ q }}</span>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        <!-- Breadcrumbs end -->
+        <!-- Search page -->
+        <section class="section search-page">
+            <div class="cnt">
+                <div class="row">
+                   <div class="col">
+                       <form class="" id="search" action="" data-url="">
+                           <div class="serach-header">
+                               <div class="align-items-center">
+                                   <input type="text" value="{{ q }}"
+                                          id="searchproduct" class="fast-search-input" name="q" autocomplete="off" placeholder="Search ...">
+                                   <button type="submit" id="" class="search-butt-fl flex-content-center">
+                                       <img src="{% static 'img/icons/search.svg' %}" alt="Search ...">
+                                   </button>
+                               </div>
+                           </div>
+                       </form>
+                   </div>
+                    <div class="col">
+                        <div class="qty-results">
+                            <p>{% trans 'Found' %} <b>{{ results|length }} </b>{% trans 'result' %}</p>
+                        </div>
+
+                        <div class="all-results">
+
+                            <!--  foreach here -->
+                            {% for result in results %}
+                            <div class="search-result">
+                                <div class="reult-tit">
+                                    <h4><b>{{ result.name }}</b></h4>
+                                </div>
+                                {% if result.short_text %}
+                                <div class="reult-desc">
+                                    {{ result.short_text|safe }}
+                                </div>
+                                {% endif %}
+                                <div class="search-but">
+                                    <a href="{{ result.get_absolute_url }}" class="button normal dark">{% trans 'See More' %}</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!--  foreach here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Search end -->
+    </main>
+    {% include 'includes/footer.html' %}
+   </div>
+   
+    <script src="{% static 'js/pb3.6_main.js' %}"></script>
+    <script src="{% static 'js/pb_script.js' %}"></script>
+
+</body>
+
+</html>

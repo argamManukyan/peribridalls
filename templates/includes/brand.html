@@ -1,0 +1,14 @@
+{% load i18n %}
+{% load static %}
+<div class="col col-3">
+    <div class="home-cat-block">
+        <figure>
+            <img src="{% if brand.image %}{{ brand.image.url }}{% else %}{% static 'img/home-cat-1.jpg' %}{% endif %}" alt="{{ brand.name }}">
+        </figure>
+        <div class="home-cat-caption">
+            <h3><a href="{{ brand.get_absolute_url }}">{{ brand.name }}</a></h3>
+            <a href="{{ brand.get_absolute_url }}" class="button normal trans">{% trans 'See more' %}
+                <img src="{% static 'img/icons/b-arr.svg' %}" alt="{% trans 'See more' %}"></a>
+        </div>
+    </div>
+</div>

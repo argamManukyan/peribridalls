@@ -1,0 +1,35 @@
+{% load i18n %}
+{% load static %}
+<div class="product-block home-cat-block">
+    {% if item.brand %}
+        <p class="brand-name-pr"><span>{{ item.brand.name }}</span></p>
+    {% endif %}
+    <!-- Wish list -->
+    {% if '/wishlist/' not in request.get_full_path %}
+        <button class="wish-list-icon flex-content-center addTOWISH-{{ item.id }} {% if item.id in wish_ids %}active{% endif %}"
+                data-url="{% url 'add_to_wish' %}" data-product="{{ item.id }}" onclick="addToWish(this)"
+        >
+            <svg class="{% if item.id in wish_ids %}active{% endif %}" width="24" height="22" viewBox="0 0 24 22"
+                 fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.4193 4.40608C23.047 3.54386 22.51 2.76253 21.8386 2.10582C21.1667 1.44715 20.3745 0.923711 19.505 0.563973C18.6035 0.189466 17.6365 -0.00222744 16.6602 1.95269e-05C15.2906 1.95269e-05 13.9544 0.375062 12.7931 1.08348C12.5153 1.25294 12.2514 1.43907 12.0014 1.64187C11.7513 1.43907 11.4874 1.25294 11.2096 1.08348C10.0484 0.375062 8.71211 1.95269e-05 7.34251 1.95269e-05C6.35628 1.95269e-05 5.40062 0.18893 4.49774 0.563973C3.62542 0.925126 2.83921 1.44463 2.16414 2.10582C1.49183 2.76179 0.95477 3.54331 0.5834 4.40608C0.197245 5.3034 0 6.25629 0 7.23696C0 8.16207 0.188911 9.12606 0.563954 10.1067C0.877878 10.9263 1.32793 11.7764 1.903 12.6348C2.81421 13.9933 4.06713 15.4101 5.62287 16.8464C8.20094 19.2272 10.754 20.8719 10.8624 20.9385L11.5208 21.3608C11.8125 21.5469 12.1875 21.5469 12.4792 21.3608L13.1376 20.9385C13.246 20.8691 15.7963 19.2272 18.3771 16.8464C19.9328 15.4101 21.1858 13.9933 22.097 12.6348C22.672 11.7764 23.1249 10.9263 23.436 10.1067C23.8111 9.12606 24 8.16207 24 7.23696C24.0027 6.25629 23.8055 5.3034 23.4193 4.40608V4.40608ZM12.0014 19.1633C12.0014 19.1633 2.11135 12.8265 2.11135 7.23696C2.11135 4.40608 4.45329 2.11137 7.34251 2.11137C9.3733 2.11137 11.1346 3.24484 12.0014 4.90058C12.8681 3.24484 14.6295 2.11137 16.6602 2.11137C19.5495 2.11137 21.8914 4.40608 21.8914 7.23696C21.8914 12.8265 12.0014 19.1633 12.0014 19.1633Z"
+                      fill="white"></path>
+            </svg>
+
+        </button>
+    {% else %}
+        <button data-url="{% url 'add_to_wish' %}" data-product="{{ item.id }}" onclick="addToWish(this)"
+                class="wish-list-icon flex-content-center active">
+            <span class="delete_prod_wish">×</span>
+        </button>
+    {% endif %}
+    <figure>
+        <img src="
+                {% if item.main_image %}{{ item.main_image.url }}{% else %}{% static 'img/home-cat-1.jpg' %}{% endif %}"
+             alt="Product Name">
+    </figure>
+    <div class="home-cat-caption">
+        <h3><a href="{{ item.get_absolute_url }}">{{ item.name|capfirst }}</a></h3>
+        <a href="{{ item.get_absolute_url }}" class="button normal trans">{% trans 'See more' %}
+            <img src="{% static 'img/icons/b-arr.svg' %}" alt="{% trans 'See more' %}"></a>
+    </div>
+</div>

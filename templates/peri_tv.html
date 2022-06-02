@@ -1,0 +1,83 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='viewport'
+          content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <title>{% trans 'Peri tv' %}</title>
+    <meta name="Description" content="">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/pb_color.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pb_style.css' %}">
+
+</head>
+
+<body>
+
+<div id="root">
+    {% include 'includes/header.html' %}
+    <!-- Main content -->
+    <main id="content" class="about-us">
+
+        <!-- Breadcrumbs -->
+        <section class="bread-bg" style="background-image:url({% if st_content.breadcrumbs_image %}{{ st_content.breadcrumbs_image.url }}{% else %}{% static 'img/breadcrumbs.jpg' %}{% endif %})">
+            <div class="cnt">
+                <div class="row">
+                    <div class="col">
+                        <div id="breadcrumbss" class="anothers-bread text-center">
+                            <div class="tit-page bread-page">
+                                <h1>{% if st_content.page_title %}{{ st_content.page_title }}{% else %}{% trans 'Peri TV' %}{% endif %}</h1>
+                                {% if st_content.breadcrumbs_text %}<p>{{ st_content.breadcrumbs_text|safe }}</p>{% endif %}
+                            </div>
+                            <nav id="breadcrumbs" class="flex-content-center">
+                                <ul class="breadcrumbs-list align-items-center">
+                                    <li class="b-list-item">
+                                        <a href="{% url 'shop:home_page' %}" class="b-list-link">{% trans 'Home' %}</a>
+                                    </li>
+                                    <span class="bread-arrow">→</span>
+                                    <li class="b-list-item">
+                                        <span>{% trans 'Peri TV' %}</span>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Breadcrumbs end -->
+        <!-- Peri TV -->
+        <section class="section tv-page">
+            <div class="cnt">
+                <div class="row">
+                    {% for video in page_obj %}
+                    <div class="col col-2">
+                        <div class="tv-block">
+                            <iframe width="560" height="315" src="{% if video.video_url %}{{ video.video_url }}{% else %}{{ video.video_file.url }}{% endif %}"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% include 'includes/pagination.html' %}
+                </div>
+            </div>
+        </section>
+        <!-- Blog end -->
+
+    </main>
+    <!-- Main content end -->
+    {% include 'includes/footer.html' %}
+</div>
+
+<script src="{% static 'js/pb3.6_main.js' %}"></script>
+<script src="{% static 'js/pb_script.js' %}"></script>
+
+</body>
+
+</html>

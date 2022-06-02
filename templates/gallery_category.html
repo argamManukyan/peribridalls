@@ -1,0 +1,124 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='viewport'
+          content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <title>{% if gallery_category.meta_title %}{{ gallery_category.meta_title }}{% else %}{{ gallery_category.name }} |
+        {{ request.get_host|capfirst }}{% endif %}</title>
+    <meta name="Description" content="">
+    <link rel="stylesheet" href="{% static 'css/pb_swiper.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/pb_color.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pb_style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>
+</head>
+
+<body>
+
+<div id="root">
+    {% include 'includes/header.html' %}
+    <!-- Main content -->
+    <main id="content" class="about-us">
+
+        <!-- Breadcrumbs -->
+        <section class="bread-bg" style="background-image:url(
+                {% if gallery_category.breadcrumbs_image %}{{ gallery_category.breadcrumbs_image.url }}{% else %}{% static 'img/breadcrumbs.jpg' %}{% endif %})">
+            <div class="cnt">
+                <div class="row">
+                    <div class="col">
+                        <div id="breadcrumbss" class="anothers-bread text-center">
+                            <div class="tit-page bread-page">
+                                <h1>{{ gallery_category.name|capfirst }}</h1>
+                                {% if gallery_category.breadcrumb_text %}
+                                    {{ gallery_category.breadcrumb_text|safe }}{% endif %}
+                            </div>
+                            <nav id="breadcrumbs" class="flex-content-center">
+                                <ul class="breadcrumbs-list align-items-center">
+                                    <li class="b-list-item">
+                                        <a href="{% url 'shop:home_page' %}" class="b-list-link">{% trans 'Home' %}</a>
+                                    </li>
+                                    <span class="bread-arrow">→</span>
+                                    <li class="b-list-item">
+                                        <a href="{% url 'gallery_list' %}" class="b-list-link">{% trans 'Gallery' %}</a>
+                                    </li>
+                                    <span class="bread-arrow">→</span>
+                                    <li class="b-list-item">
+                                        <span>{{ gallery_category.name|capfirst }}</span>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Breadcrumbs end -->
+
+
+        <!-- Gallery -->
+        <section class="section gallery-page">
+            <div class="cnt">
+                <div class="row">
+                    <div class="col">
+                        <div class="swiper-container cat-names">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="{% url 'gallery_list' %}"
+                                       class="cat-but button normal sl">{% trans 'All' %}</a>
+                                </div>
+                                {% for cat in gallery_categories %}
+                                    <div class="swiper-slide">
+                                        <a href="{{ cat.get_absolute_url }}"
+                                           class="cat-but button normal sl {% if cat.slug == gallery_category.slug %}active{% endif %}">{{ cat.name|capfirst }}</a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    </div>
+                    <ul class="gallery align-items-center">
+                        {% for img in page_obj %}
+                        <li class="col col-3">
+                           <div class="full_img_new">
+                               <a href="{{ img.image.url }}" data-fancybox="images">
+                                   <figure>
+                                       <img src="{{ img.image.url }}" alt="{{ img.category.name }}">
+                                       <div class="pr-page-zoom">
+                                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                               <path d="M6.3,14.3H4V20h5.7v-2.3H6.3V14.3z M4,9.7h2.3V6.3h3.4V4H4V9.7z M17.7,17.7h-3.4V20H20v-5.7h-2.3V17.7z M14.3,4v2.3h3.4v3.4 H20V4H14.3z"></path>
+                                           </svg>
+                                       </div>
+                                   </figure>
+                               </a>
+                               <figcaption><span>{{ img.category.name }}</span></figcaption>
+
+                           </div>
+                       </li>
+                       {% endfor %}
+
+                    </ul>
+                    {% include 'includes/pagination.html' %}
+                </div>
+            </div>
+        </section>
+        <!-- Blog end -->
+
+    </main>
+    <!-- Main content end -->
+    {% include 'includes/footer.html' %}
+</div>
+
+<script src="{% static 'js/pb3.6_main.js' %}"></script>
+<script src="{% static 'js/pb_script.js' %}"></script>
+<script src="{% static 'js/pb_swiper.js' %}"></script>
+<script src="{% static 'js/pb_swiperex.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+</body>
+
+</html>

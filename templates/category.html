@@ -1,0 +1,150 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='viewport'
+          content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <title>{% if category.meta_title %}{{ category.meta_title }}{% else %}{{ category.name }} |
+        {{ request.get_host|title }}{% endif %}</title>
+    <meta name="Description" content="">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/pb_swiper.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pb_color.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pb_style.css' %}">
+</head>
+
+<body>
+
+<div id="root">
+    {% include 'includes/header.html' %}
+    <!-- Main content -->
+    <main id="content" class="about-us">
+        <!-- Breadcrumbs -->
+        <section class="bread-bg" style="background-image:url(
+                {% if category.breadcrumb_image %}{{ category.breadcrumb_image.url }}{% else %}{% static 'img/breadcrumbs.jpg' %}{% endif %})">
+            <div class="cnt">
+                <div class="row">
+                    <div class="col">
+                        <div id="breadcrumbss" class="anothers-bread text-center">
+                            <div class="tit-page bread-page">
+                                <h1>{{ category.name|capfirst }}</h1>
+                                <p>{{ category.breadcrumb_text|safe }}</p>
+                            </div>
+                            <nav id="breadcrumbs" class="flex-content-center">
+                                <ul class="breadcrumbs-list align-items-center">
+                                    <li class="b-list-item">
+                                        <a href="{% url 'shop:home_page' %}" class="b-list-link">{% trans 'Home' %}</a>
+                                    </li>
+                                    <span class="bread-arrow">→</span>
+                                    <li class="b-list-item">
+                                        <a href="{% url 'shop:category_list' %}" class="b-list-link">{% trans 'Categories' %}</a>
+                                    </li>
+                                    <span class="bread-arrow">→</span>
+                                    <li class="b-list-item">
+                                        <span>{{ category.name|capfirst }}</span>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Breadcrumbs end -->
+
+        <!-- Shop -->
+        <div class="section all-shop-cnt">
+            <div class="cnt">
+                <div class="row">
+                    <div class="section col">
+                        <div class="title-section text-center">
+                            <h3>
+                                <a href="{% url 'shop:brand_list' %}">{% trans 'Brands' %}</a>
+                            </h3>
+                        </div>
+
+                        <div class=" swiper-container slider-brands">
+                            <div class="swiper-wrapper">
+                                {% for br in brands %}
+                                    <a href="{{ br.get_absolute_url }}"
+                                       class="swiper-slide">
+                                        <div class="brand-logo text-center">
+                                            <img src="{% if br.icon %}{{ br.icon.url }}{% else %}{% static 'img/b-1.svg' %}{% endif %}"
+                                                 alt="{{ br.name }}">
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-4 sh-pg">
+                        <div class="br-shpage">
+                            <div class="nav-offcanvas-content">
+                                <div id="op-time" class="block-title">
+                                    <h3 class="align-items-center">
+                                        <img src="{% static 'img/icons/catalog-white.svg' %}" class="cat-name-mr"
+                                             alt="Brands">
+                                        <span>{% trans 'Categories' %}</span>
+                                        <img src="{% static 'img/icons/cat-down.svg' %}" class="border-icons ml-auto"
+                                             alt="Cat down icon">
+                                    </h3>
+                                </div>
+                                <nav class="block-content">
+                                    <ul id="cat-names">
+                                        {% for cat in categories %}
+                                            <li class="{% if cat.slug == category.slug  %}active{% endif %}">
+                                                <a href="{{ cat.get_absolute_url }}"
+                                                   class="sub-tit ">{{ cat.name|capfirst }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </nav>
+                            </div>
+                            <hr class="s-hr m-none">
+                            {% include 'includes/filter.html' %}
+                        </div>
+                    </div>
+
+                    <div class="col col-9">
+                        <div class="br-shpage-right">
+                            <div class="products-settings">
+                                <div class="filter-bar d-none">
+                                    <img src="{% static 'img/icons/filter.svg' %}" alt="Filters">{% trans 'Filters' %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="products-cont">
+                            <div class="row full-ban">
+                                {% for item in page_obj %}
+                                    <div class="col col-2">
+                                        {% include 'includes/product.html' %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            {% include 'includes/pagination.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shop end -->
+
+    </main>
+    {% include 'includes/footer.html' %}
+</div>
+
+<script src="{% static 'js/pb3.6_main.js' %}"></script>
+<script src="{% static 'js/pb_script.js' %}"></script>
+<script src="{% static 'js/pb_swiper.js' %}"></script>
+<script src="{% static 'js/pb_swiperex.js' %}"></script>
+<script src="{% static 'js/filter.js' %}"></script>
+<script src="{% static 'js/wish.js' %}"></script>
+
+</body>
+
+</html>

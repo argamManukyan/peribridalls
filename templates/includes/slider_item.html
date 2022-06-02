@@ -1,0 +1,21 @@
+{% load i18n %}
+{% load static %}
+<div class="swiper-slide">
+    <div class="slide-desc-image">
+        <div class="slide-desc">
+            {% if slide.text %}
+            {{ slide.text|safe }}
+            {% endif %}
+            {% if slide.url %}
+            <div class="slide-desc-button flex-content-center">
+                <a href="{{ slide.url }}" class="button normal trans">{% trans 'Discover it' %}
+                    <img src="{% static 'img/icons/b-arr.svg' %}" alt="{% trans 'Discover' %}"></a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="slide-image">
+            <img class="main-slide-x xl-none" src="{{ slide.image.url }}" alt="Peri Bridals">
+            <img class="main-slide-xs ml-none" src="{{ slide.image_small.url }}" alt="Peri Bridals">
+        </div>
+    </div>
+</div>

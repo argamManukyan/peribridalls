@@ -1,0 +1,30 @@
+{% load static %}
+{% load i18n %}
+<article class="blog-item">
+    <div class="blog-article-header">
+        <figure>
+            <a href="{{ post.get_absolute_url }}">
+                <img src="{% if post.image %}{{ post.image.url }}{% else %}{% static 'img/blog.jpg' %}{% endif %}"
+                     alt="{{ post.name }}">
+            </a>
+        </figure>
+        <div class="blog-views calendars align-items-center">
+            <div class="calendar-on align-items-center">
+                <span>{{ post.created|date:"Y-m-d" }}</span>
+            </div>
+            <div class="views-on align-items-center">
+                <img src="{% static 'img/icons/eye.svg' %}" class="view-icon" alt="views">
+                <span>{{ post.views_count }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="blog-article-footer">
+        <h4 class="blog-art-heading align-items-center">
+            <a href="{{ post.get_absolute_url }}" class="line-clamp2">{{ post.name }}</a>
+        </h4>
+        {% if post.short_text %}{{ post.short_text|safe }}{% endif %}
+        <a href="{{ post.get_absolute_url }}"
+           class="button normal trans">{% trans 'Learn More' %}
+            <img src="{% static 'img/icons/b-arr.svg' %}" alt=""></a>
+    </div>
+</article>

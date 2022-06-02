@@ -1,0 +1,232 @@
+{% load static %}
+{% load i18n %}
+<header>
+    <div class="middle-header">
+        <div class="cnt">
+            <div class="row flex-center-between">
+                <div class="col col-auto dl-none">
+                    <ul class="rigt-menu-main align-items-center">
+                        <li class="wish-t">
+                            <a href="{% url 'wishlist' %}">
+                                <img src="{% static 'img/icons/heart.svg' %}" alt="Wish List">
+                                <span class="in-cart-qty flex-content-center wishCount"
+                                      id="wishCount">{{ wish_ids|length }}</span>
+                                <span class="h_txt">{% trans 'Wishlsit' %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'contact_us' %}">
+                                <img src="{% static 'img/icons/t-phone.svg' %}" alt="Call Us" style="margin-top: -2px;">
+                                <span class="h_txt">{% trans 'Call Us' %}</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col col-auto">
+                    <div class="logo-main">
+                        <a href="{% url 'shop:home_page' %}" class="md-none">
+                            <img src="{% static 'img/logo.svg' %}" alt="Peri Bridals">
+                        </a>
+                        <a href="{% url 'shop:home_page' %}" class="dl-none">
+                            <img src="{% static 'img/logo-mob.svg' %}" alt="Peri Bridals">
+                        </a>
+                    </div>
+                </div>
+                <div class="nav-offcanvas">
+                    <ul class="mob-top-header cutter flex-center-between dl-none">
+                        <li class="catalog-first-name align-items-center">
+                            <img src="{% static 'img/m-logo.svg' %}" alt="Peri Bridals">
+                        </li>
+                        <li id="offCanvasClose">
+                            <img src="{% static 'img/icons/catalog-close.svg' %}" class="catalog-fully-close"
+                                 alt="Close">
+                        </li>
+                    </ul>
+
+                    <ul class="mob-langs cutter align-items-center dl-none">
+                        {% if request.LANGUAGE_CODE == 'en' %}
+                            <li><a href="javascript:void(0);" class="active">Eng</a></li>
+                            <li><a href="{{ site }}/hy{{ request.get_full_path }}">Հայ</a>
+                            </li>
+                            <li>
+                                <a href="{{ site }}/ru{{ request.get_full_path }}">Рус</a>
+                            </li>
+                        {% elif request.LANGUAGE_CODE == 'ru' %}
+                            <li><a href="javascript:void(0);" class="active">Рус</a></li>
+                            <li><a href="{{ site }}/hy{{ request.get_full_path|cut:"/ru" }}">Հայ</a>
+                            </li>
+                            <li>
+                                <a href="{{ site }}{{ request.get_full_path|cut:"/ru" }}">Eng</a>
+                            </li>
+                            {% else %}
+                            <li><a href="javascript:void(0);" class="active">Հայ</a></li>
+                            <li><a href="{{ site }}{{ request.get_full_path|cut:"/hy" }}">Eng</a>
+                            </li>
+                            <li>
+                                <a href="{{ site }}/ru{{ request.get_full_path|cut:"/hy" }}">Рус</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <div class="nav-offcanvas-menu">
+                        <ul class="align-items-center">
+                            {% for head_link in header_links|slice:":2" %}
+                                <li {% if head_link.url in request.get_full_path %}class="active"{% endif %}><a
+                                        href="{{ head_link.url }}">{{ head_link.name }}</a></li>
+                            {% endfor %}
+                            <li {% if header_categories %}class="uWithSubmenu {% if check_collection %}active{% endif %}"{% endif %}>
+                                <a href="{% url 'shop:brand_list' %}">{% trans 'Collection' %}</a>
+                                <ul>
+                                    {% for cat in header_categories %}
+                                        <li><a href="{{ cat.get_absolute_url }}">{{ cat.name|title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% if header_links.count > 2 %}
+                                {% for head_item in header_links|slice:"2:" %}
+                                    <li {% if head_link.url in request.get_full_path %}class="active"{% endif %}>
+                                        <a href="{{ head_item.url }}">{{ head_item.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                        <div class="mob-tv dl-none">
+                            <a href="{% url 'peri_tv' %}">
+                                <img src="{% static 'img/icons/m-tv.svg' %}" alt="{% trans 'Peri TV' %}">
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col col-auto">
+                    <ul class="rigt-menu-main align-items-center">
+                        <li>
+                            <a href="javascript:void(0);">
+                                <img src="{% static 'img/icons/search.svg' %}" id="search-show" alt="search">
+                                <span class="h_txt dl-none">{% trans 'Search' %}</span>
+                            </a>
+                            <form class="search-bar" id="search" action="{% url 'shop:search' %}">
+                                <span id="search-close">×</span>
+                                <div class="serach-header">
+                                    <div class="fast-search align-items-center">
+                                        <input type="text" id="searchproduct" class="fast-search-input" name="q"
+                                               autocomplete="off" placeholder="{% trans 'Search' %} ...">
+                                        <button type="submit" id="" class="search-butt-fl flex-content-center"><img
+                                                src="{% static 'img/icons/search.svg' %}"
+                                                alt="{% trans 'Search' %} ...">
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+
+                        <!-- Desktop wish -->
+                        <li class="wish-t md-none">
+                            <a href="{% url 'wishlist' %}">
+                                <img src="{% static 'img/icons/heart.svg' %}" alt="Wish List">
+                                <span class="in-cart-qty flex-content-center wishCount"
+                                      id="wishCount">{{ wish.items.count }}</span>
+                                <span class="h_txt dl-none">{% trans 'Menu' %}</span>
+                            </a>
+                        </li>
+                        <!-- Desktop wish end -->
+
+                        <!-- Desktop langs -->
+                        {% if request.LANGUAGE_CODE == 'en' %}
+                            <li class="web_langs md-none">
+                                <a href="javascript:void(0);" class="choose">
+                                <span class="menus align-items-center">
+                                    <img src="{% static 'img/icons/eng.png' %}" class="flag_lang" alt="English">
+                                    <img src="{% static 'img/icons/menu-down.svg' %}" class="down-icon"
+                                         alt="choose">
+                                </span>
+                                </a>
+                                <ul class="choose_lang">
+                                    <li>
+                                        <a href="{{ site }}/hy{{ request.get_full_path }}">
+                                            <img src="{% static 'img/icons/arm.png' %}" class="flag_lang" alt="Հայերեն">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ site }}/ru{{ request.get_full_path }}">
+                                            <img src="{% static 'img/icons/rus.png' %}" class="flag_lang" alt="Русский">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% elif request.LANGUAGE_CODE == 'ru' %}
+                            <li class="web_langs md-none">
+                                <a href="javascript:void(0);" class="choose">
+                                <span class="menus align-items-center">
+                                    <img src="{% static 'img/icons/rus.png' %}" class="flag_lang" alt="Русский">
+                                    <img src="{% static 'img/icons/menu-down.svg' %}" class="down-icon"
+                                         alt="choose">
+                                </span>
+                                </a>
+                                <ul class="choose_lang">
+                                    <li>
+                                        <a href="{{ site }}/hy{{ request.get_full_path|cut:"/ru" }}">
+                                            <img src="{% static 'img/icons/arm.png' %}" class="flag_lang" alt="Հայերեն">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ site }}{{ request.get_full_path|cut:"/ru" }}">
+                                            <img src="{% static 'img/icons/eng.png' %}" class="flag_lang" alt="English">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="web_langs md-none">
+                                <a href="javascript:void(0);" class="choose">
+                                <span class="menus align-items-center">
+                                    <img src="{% static 'img/icons/arm.png' %}" class="flag_lang" alt="Հայերեն">
+                                    <img src="{% static 'img/icons/menu-down.svg' %}" class="down-icon"
+                                         alt="choose">
+                                </span>
+                                </a>
+                                <ul class="choose_lang">
+                                    <li>
+                                        <a href="{{ site }}{{ request.get_full_path|cut:"/hy" }}">
+                                            <img src="{% static 'img/icons/arm.png' %}" class="flag_lang" alt="English">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ site }}/ru{{ request.get_full_path|cut:"/hy" }}">
+                                            <img src="{% static 'img/icons/eng.png' %}" class="flag_lang" alt="Русский">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                        <!-- Desktop langs end -->
+                        <li class="peri-tv md-none">
+                            <a href="{% url 'peri_tv' %}" class="flex-content-center">
+                                <span>{% trans 'Peri TV' %}</span>
+                                <img src="{% static 'img/icons/tv.svg' %}" alt="{% trans 'Peri tv' %}">
+                            </a>
+                        </li>
+                        <!-- Mobile menu button -->
+                        <li id="offCanvas" class="dl-none">
+                            <a href="javascript:void(0)">
+                                <img src="{% static 'img/icons/mob-menu.svg' %}"
+                                     class="hamburger" alt="{% trans 'Open Menu' %}">
+                                <span class="h_txt">{% trans 'Menu' %}</span>
+                            </a>
+                        </li>
+                        <!-- Mobile menu button end -->
+                    </ul>
+                </div>
+                <div class="offcanvas-overlay dl-none"></div>
+            </div>
+        </div>
+    </div>
+</header>
+{% if request.resolver_match.url_name != 'home_page' %}
+    <!-- Fixed Appointment-->
+    <div id="fix_book_butt">
+        <a href="{% url 'shop:home_page' %}#appointment" class="button-callback-book">
+            <span class="fix_txt">{% trans 'Book Your Appointment' %}</span>
+        </a>
+    </div>
+{% endif %}
