@@ -8,9 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name='viewport'
           content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
-    <title>{% if category.meta_title %}{{ category.meta_title }}{% else %}{{ category.name }} |
-        {{ request.get_host|title }}{% endif %}</title>
-    <meta name="Description" content="">
+    <title>{% trans 'Collection' %}</title>
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'css/pb_swiper.css' %}">
     <link rel="stylesheet" href="{% static 'css/pb_color.css' %}">
@@ -31,8 +29,8 @@
                     <div class="col">
                         <div id="breadcrumbss" class="anothers-bread text-center">
                             <div class="tit-page bread-page">
-                                <h1>{{ category.name|capfirst }}</h1>
-                                <p>{% if category.breadcrumb_text %}{{ category.breadcrumb_text|safe }}{% endif %}</p>
+                                <h1>{% if st_content.page_title %}{{ st_content.page_title }}{% else %}{% trans 'Collection' %}{% endif %}</h1>
+                                {% if st_content.breadcrumbs_text %}<p>{{ st_content.breadcrumbs_text|safe }}</p>{% endif %}
                             </div>
                             <nav id="breadcrumbs" class="flex-content-center">
                                 <ul class="breadcrumbs-list align-items-center">
@@ -41,11 +39,7 @@
                                     </li>
                                     <span class="bread-arrow">→</span>
                                     <li class="b-list-item">
-                                        <a href="{% url 'shop:category_list' %}" class="b-list-link">{% trans 'Categories' %}</a>
-                                    </li>
-                                    <span class="bread-arrow">→</span>
-                                    <li class="b-list-item">
-                                        <span>{{ category.name|capfirst }}</span>
+                                        <span>{% trans 'Collection' %}</span>
                                     </li>
                                 </ul>
                             </nav>
@@ -96,7 +90,7 @@
                                 <nav class="block-content">
                                     <ul id="cat-names">
                                         {% for cat in categories %}
-                                            <li class="{% if cat.slug == category.slug  %}active{% endif %}">
+                                            <li class="active">
                                                 <a href="{{ cat.get_absolute_url }}"
                                                    class="sub-tit ">{{ cat.name|capfirst }}</a>
                                             </li>

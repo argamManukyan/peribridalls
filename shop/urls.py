@@ -7,7 +7,8 @@ app_name = 'shop'
 
 urlpatterns = [
     path('', csrf_exempt(home_page), name='home_page'),
-    path('collection/', brand_list, name='brand_list'),
+    path('collection/', products_list, name='product_list'),
+    path('brands/', brand_list, name='brand_list'),
     path('categories/', category_list, name='category_list'),
     re_path('collection/(?P<slug>[\w-]+)/', brand_details, name='brand_details'),
     re_path('category/(?P<slug>[\w-]+)/', category_details, name='category_details'),

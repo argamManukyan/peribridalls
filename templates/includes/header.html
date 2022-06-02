@@ -75,7 +75,7 @@
                                         href="{{ head_link.url }}">{{ head_link.name }}</a></li>
                             {% endfor %}
                             <li {% if header_categories %}class="uWithSubmenu {% if check_collection %}active{% endif %}"{% endif %}>
-                                <a href="{% url 'shop:brand_list' %}">{% trans 'Collection' %}</a>
+                                <a href="{% url 'shop:product_list' %}">{% trans 'Collection' %}</a>
                                 <ul>
                                     {% for cat in header_categories %}
                                         <li><a href="{{ cat.get_absolute_url }}">{{ cat.name|title }}</a></li>

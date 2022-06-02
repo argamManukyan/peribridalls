@@ -30,6 +30,30 @@ def brand_list(request):
     return render(request, 'all_brands.html', context)
 
 
+def products_list(request):
+    products = Product.objects.all()
+    products_sort = sorted(products)
+
+    page_obj = paginated_response(request, products)
+    colors = Color.objects.all()
+    brands = Brand.objects.all()
+    filter_fields = FilterField.objects.filter(Q(show_in_filters=True),
+                                               Q(productfeature__value__isnull=False)).distinct()
+
+    featured_values = FilterValue.objects.filter(Q(productfeature__field__show_in_filters=True),
+                                                 Q(productfeature__value__isnull=False)).distinct()
+    st_content = BreadcrumbTexts.objects.filter(location='products')
+    context = {
+        'page_obj': page_obj,
+        'colors': colors,
+        'brands': brands,
+        'filter_fields': filter_fields,
+        'featured_values': featured_values,
+        'st_content': st_content,
+    }
+
+    return render(request, '')
+
 def category_list(request):
     st_content: BreadcrumbTexts = BreadcrumbTexts.objects.filter(location='categories').first()
     categories = Category.objects.filter(parent=None)

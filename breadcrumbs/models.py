@@ -8,7 +8,7 @@ TEXT_LOCATION = [
     # ('new', 'Նորույթ'),
     ('categories', 'Բաժինների էջ'),
     ('brands', 'Բրենդների էջ'),
-    # ('search', 'Որոնում'),
+    ('products', 'Collection -ի էջ'),
     ('blog', 'Բլոգ'),
     ('gallery', 'Տեսադարան'),
     ('contacts', 'Կապ'),
