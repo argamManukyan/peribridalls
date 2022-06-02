@@ -36,10 +36,9 @@
                                                     type="checkbox"
                                                     class="color check"
                                                     value="{{ brand.id }}"
-                                                    id="id_colors_{{ forloop.counter }}"
+                                                    id="id_brands_{{ forloop.counter }}"
                                                     name="brands"
                                                     {% for k,v in request.GET.lists %}
-                                                        {{ k }} - {{ v|urlencode }}
                                                         {% if brand.id in v and k == 'brands' %}
                                                     checked
                                                         {% endif %}
