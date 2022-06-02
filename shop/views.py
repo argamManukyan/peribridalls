@@ -138,7 +138,7 @@ def filter_products(request, products) -> list:
         products = products.filter(finally_price__lte=int(request.GET.get('max_price')))
 
     if request.GET.get('brands'):
-        products = products.filter(brand_id__in=request.GET.getlist('brands'))
+        products = products.filter(brand__slug__in=request.GET.getlist('brands'))
 
     if len(q_condition_queries):
         for filter_item in q_condition_queries:

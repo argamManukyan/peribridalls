@@ -35,12 +35,12 @@
                                             <input
                                                     type="checkbox"
                                                     class="color check"
-                                                    value="{{ brand.id }}"
+                                                    value="{{ brand.slug }}"
                                                     id="id_brands_{{ forloop.counter }}"
                                                     name="brands"
                                                     {% for k,v in request.GET.lists %}
-                                                        {% if brand.id in v %}
-                                                            {{ k }} -- {{ v }}
+                                                        {% if brand.slug in v %}
+                                                          checked
                                                         {% endif %}
                                                     {% endfor %}
                                             >
