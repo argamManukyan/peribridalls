@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # thrid part plugins
-
+    'easy_select2',
     'ckeditor_uploader',
     'ckeditor',
     'singlemodeladmin',
