@@ -52,7 +52,7 @@ def products_list(request):
         'st_content': st_content,
     }
 
-    return render(request, '')
+    return render(request, 'product_list.html', context)
 
 def category_list(request):
     st_content: BreadcrumbTexts = BreadcrumbTexts.objects.filter(location='categories').first()
