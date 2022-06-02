@@ -6,16 +6,16 @@
         <div class="filter_menu_content">
             <div class="filter-header d-none">
                 <div class="widget-heading flex-center-between">
-                    <span class="widget-title">{% trans 'Ֆիլտրեր' %}</span>
+                    <span class="widget-title">{% trans 'Filters' %}</span>
                     <img src="{% static 'img/icons/catalog-close.svg' %}" id="offFilterClose"
-                         class="close" alt="{% trans 'Փակել' %}">
+                         class="close" alt="{% trans 'Close' %}">
                 </div>
             </div>
             <div class="filter-widget-content">
                 <div class="params-on-tit m-none">
                     <h3>
                         <img src="{% static 'img/icons/filter.svg' %}"
-                             alt="Filters"><span>{% trans 'Ֆիլտրեր' %}</span>
+                             alt="Filters"><span>{% trans 'Filters' %}</span>
                     </h3>
                 </div>
                 <form method="get" class="filters-marani" id="allFilter"
@@ -24,7 +24,7 @@
                     {% if brands %}
                         <div class="filter-params">
                             <div class="filter-params-title">
-                                <h4 class="filter-params-hint flex-center-between">{% trans 'Բրենդ' %}
+                                <h4 class="filter-params-hint flex-center-between">{% trans 'Brand' %}
                                     <img src="{% static 'img/icons/cat-down.svg' %}" class="cat-left border-icons">
                                 </h4>
                             </div>
@@ -56,7 +56,7 @@
                     {% if colors %}
                         <div class="filter-params">
                             <div class="filter-params-title">
-                                <h4 class="filter-params-hint flex-center-between">{% trans 'Գույն' %}
+                                <h4 class="filter-params-hint flex-center-between">{% trans 'Color' %}
                                     <img src="{% static 'img/icons/cat-down.svg' %}" class="cat-left border-icons">
                                 </h4>
                             </div>
@@ -95,7 +95,6 @@
                             </div>
                             <div class="filter-params-content">
                                 {% for feat_val in field.productfeature_set.all|unique %}
-
                                     <div class="box-list">
                                         <label class="checkbox-design align-items-center">
                                             <input
