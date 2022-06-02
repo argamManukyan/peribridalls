@@ -36,6 +36,7 @@ def products_list(request):
 
     page_obj = paginated_response(request, products)
     colors = Color.objects.all()
+    categories = Category.objects.all()
     brands = Brand.objects.all()
     filter_fields = FilterField.objects.filter(Q(show_in_filters=True),
                                                Q(productfeature__value__isnull=False)).distinct()
@@ -50,6 +51,7 @@ def products_list(request):
         'filter_fields': filter_fields,
         'featured_values': featured_values,
         'st_content': st_content,
+        'categories': categories,
     }
 
     return render(request, 'product_list.html', context)
