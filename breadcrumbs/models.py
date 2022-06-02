@@ -26,7 +26,7 @@ class BreadcrumbTexts(CustomModel):
     page_title = models.CharField(max_length=255, blank=True, verbose_name='Էջի վերնագիր')
 
     def __str__(self):
-        return f'{self.page_title}'
+        return f'{self.get_location_display()}'
 
     class Meta:
         verbose_name = 'Breadcrumb -ի կոնտենտ'

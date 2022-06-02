@@ -4,7 +4,7 @@ from . import models
 
 @register(models.ContactUsPage)
 class ContactUsPageTranslate(TranslationOptions):
-    fields = ['meta_title', 'meta_description', 'breadcrumbs_text']
+    fields = ['meta_title', 'meta_description']
 
 
 @register([models.ContactUsJoinUsData, models.FollowUsContactUs])

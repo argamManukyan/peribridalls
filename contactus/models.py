@@ -8,10 +8,10 @@ class ContactUsPage(CustomModel):
     meta_title = models.CharField(max_length=255, blank=True, null=True)
     meta_description = models.TextField(max_length=300, blank=True, null=True)
     iframe = models.TextField(verbose_name="Քարտեզ (Iframe)", blank=True, null=True)
-    breadcrumb_image = models.FileField(validators=[FileExtensionValidator(
-        allowed_extensions=['jpg', 'svg', 'png', 'jpeg']
-    )], verbose_name="Breadcrumb -ի Նկար", blank=True, null=True)
-    breadcrumbs_text = models.TextField(verbose_name="Breadcrumb -ի տեքստ", blank=True, null=True)
+    # breadcrumb_image = models.FileField(validators=[FileExtensionValidator(
+    #     allowed_extensions=['jpg', 'svg', 'png', 'jpeg']
+    # )], verbose_name="Breadcrumb -ի Նկար", blank=True, null=True)
+    # breadcrumbs_text = models.TextField(verbose_name="Breadcrumb -ի տեքստ", blank=True, null=True)
 
     # my_order = models.PositiveIntegerField(default=0, verbose_name="Դասավորել")
 
