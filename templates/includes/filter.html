@@ -39,7 +39,7 @@
                                                     id="id_brands_{{ forloop.counter }}"
                                                     name="brands"
                                                     {% for k,v in request.GET.lists %}
-                                                        {% if brand.id in v and k == 'brands' %}
+                                                        {% if brand.id in v %}
                                                             {{ k }} -- {{ v }}
                                                         {% endif %}
                                                     {% endfor %}

@@ -37,8 +37,8 @@ def unique(qs):
         else:
             list_ids = [category.id]
 
-    except Category.DoesNotExist | Brand.DoesNotExist:
-        raise Http404
+    except Exception as e:
+        pass
 
     qs_array = []
     num_array = []
