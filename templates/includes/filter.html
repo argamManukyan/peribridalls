@@ -18,7 +18,7 @@
                              alt="Filters"><span>{% trans 'Filters' %}</span>
                     </h3>
                 </div>
-                {{ request.resolver_match.kwargs.url_name }}
+                {{ request.resolver_match }}
                 <form method="get" class="filters-marani" id="allFilter"
                       onchange="filter()">
 
