@@ -11,13 +11,13 @@ class BlogCategory(CustomMetaModel):
     breadcrumb_image = CustomLogoField(verbose_name='Բաժնի բանների նկար',
                                        blank=True, null=True, upload_to='blog-cat-bg-image/')
     breadcrumb_text = RichTextUploadingField(verbose_name="Բանների տեքստ", blank=True, null=True)
-    # my_order = models.PositiveIntegerField(default=0, verbose_name="Դասավորել")
+    my_order = models.PositiveIntegerField(default=0, verbose_name="Դասավորել")
 
     def __str__(self):
         return self.name
 
     class Meta:
-        # ordering = ['-my_order']
+        ordering = ['-my_order']
         verbose_name = "Բլոգի բաժին"
         verbose_name_plural = "Բլոգի բաժիններ"
 
@@ -26,7 +26,7 @@ class BlogCategory(CustomMetaModel):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slug_generator(self.name)
+            self.slug = slug_generator(self.name, self.__class__)
 
         return super().save(*args, **kwargs)
 
@@ -43,10 +43,10 @@ class Blog(CustomMetaModel):
     large_text = RichTextUploadingField(verbose_name="Ամբողջական տեքստ")
     views_count = models.PositiveIntegerField(default=0, editable=False)
     image = CustomLogoField(verbose_name='Գլխավոր նկար', blank=True, null=True, upload_to='blog-image/')
-    # my_order = models.PositiveIntegerField(default=0, verbose_name="Դասավորել")
+    my_order = models.PositiveIntegerField(default=0, verbose_name="Դասավորել")
 
     class Meta:
-        # ordering = ['-my_order']
+        ordering = ['-my_order']
         verbose_name = "Բլոգ"
         verbose_name_plural = 'Բլոգ'
 
@@ -55,7 +55,7 @@ class Blog(CustomMetaModel):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slug_generator(self.name)
+            self.slug = slug_generator(self.name, self.__class__)
 
         return super().save(*args, **kwargs)
 

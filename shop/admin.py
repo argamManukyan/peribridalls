@@ -51,7 +51,7 @@ admin.site.register(Product, ProductAdmin)
 
 
 @admin.register(Color)
-class ColorAdmin(SortableAdminMixin,TabbedDjangoJqueryTranslationAdmin):
+class ColorAdmin(SortableAdminMixin, TabbedDjangoJqueryTranslationAdmin):
     def get_color(self, obj):
         if obj.color_code:
             return mark_safe(f'<div style=" width: 400px;height: 40px; background: {obj.color_code};"></div>')
@@ -72,7 +72,7 @@ class FilterValueModelAdmin(TabbedDjangoJqueryTranslationAdmin):
 
 
 @admin.register(Brand)
-class BrandAdmin(TabbedDjangoJqueryTranslationAdmin):
+class BrandAdmin(SortableAdminMixin, TabbedDjangoJqueryTranslationAdmin):
 
     def get_logo(self, obj: Brand):
         if obj.icon:

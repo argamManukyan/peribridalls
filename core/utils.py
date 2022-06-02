@@ -67,8 +67,8 @@ class CustomLogoField(models.FileField):
         self.blank = kwargs.get('blank', self.blank)
 
 
-def slug_generator(title):
-    last_id = int(time.time())
+def slug_generator(title, model):
+    last_id = model.objects.order_by('-id').first().id + 1 if model.objects.count() else 1
     return slugify(unidecode(title) + '-' + str(last_id))
 
 

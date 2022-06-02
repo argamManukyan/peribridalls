@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'singlemodeladmin',
     'mptt',
     'colorfield',
+    'rosetta',
     # apps
     'about',
     'header',
@@ -57,7 +58,8 @@ INSTALLED_APPS = [
     'shop',
     'adminsortable2',
     'wish',
-    'staticpages'
+    'staticpages',
+
 ]
 
 MIDDLEWARE = [

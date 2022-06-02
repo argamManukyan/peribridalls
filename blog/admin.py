@@ -7,12 +7,12 @@ from blog.models import Blog, BlogCategory
 
 
 @admin.register(BlogCategory)
-class BlogCategoryAdmin(TabbedDjangoJqueryTranslationAdmin):
+class BlogCategoryAdmin(SortableAdminMixin, TabbedDjangoJqueryTranslationAdmin):
     pass
 
 
 @admin.register(Blog)
-class BlogAdmin(TabbedDjangoJqueryTranslationAdmin):
+class BlogAdmin(SortableAdminMixin, TabbedDjangoJqueryTranslationAdmin):
     list_display = ['name']
 
     def get_image(self, obj):

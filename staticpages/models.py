@@ -19,7 +19,7 @@ class StaticPages(CustomModel):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slug_generator(self.page_title)
+            self.slug = slug_generator(self.page_title, self.__class__)
             
         super(StaticPages, self).save(*args, **kwargs)
 

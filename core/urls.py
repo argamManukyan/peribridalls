@@ -10,6 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('add_to_wish/', add_to_wish, name='add_to_wish'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('rosetta/', include('rosetta.urls')),
 ]
 
 urlpatterns += i18n_patterns(

@@ -23,7 +23,7 @@ class GalleryCategory(CustomMetaModel):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slug_generator(self.name)
+            self.slug = slug_generator(self.name, self.__class__)
 
         return super().save(*args, **kwargs)
 

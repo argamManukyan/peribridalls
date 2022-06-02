@@ -8,13 +8,13 @@ class Slider(CustomModel):
     image_small = CustomLogoField(blank=False, verbose_name="Փոքր նկար")
     text = RichTextUploadingField(blank=True, null=True)
     url = models.URLField(blank=True, null=True, verbose_name="Ամբողջական հղում")
-    # my_order = models.PositiveIntegerField(default=0, verbose_name="Դասավորել")
+    my_order = models.PositiveIntegerField(default=0, verbose_name="Դասավորել")
 
     def __str__(self):
         return str(self.pk)
 
     class Meta:
-        # ordering = ['my_order']
+        ordering = ['my_order']
         verbose_name = 'Գլխավոր էջի սլայդ'
         verbose_name_plural = 'Գլխավոր էջի սլայդեր'
 
@@ -24,7 +24,7 @@ class Header(CustomModel):
 
     name = models.CharField(max_length=255, verbose_name='Անուն')
     url = models.URLField(verbose_name="Ամբողջական հղում")
-    # my_order = models.PositiveIntegerField(default=0, verbose_name="Դասավորել")
+    my_order = models.PositiveIntegerField(default=0, verbose_name="Դասավորել")
 
     def __str__(self):
         return self.name
@@ -34,7 +34,7 @@ class Header(CustomModel):
             self.url += '/'
         super().save(*args, **kwargs)
 
-    # class Meta:
-    #     ordering = ['my_order']
+    class Meta:
+        ordering = ['my_order']
 
 

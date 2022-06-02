@@ -17,16 +17,18 @@ class Brand(CustomMetaModel):
     icon = CustomLogoField(verbose_name="Լոգո", blank=True, null=True)
     breadcrumb_image = CustomLogoField(verbose_name="Breadcrumb -ի նկար", blank=True, null=True)
     breadcrumb_text = models.TextField(blank=True, verbose_name="Breadcrumb -ի տեքստ")
+    my_order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name='Դասավորել')
 
     def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slug_generator(self.name)
+            self.slug = slug_generator(self.name, self.__class__)
         super().save(*args, **kwargs)
 
     class Meta:
+        ordering = ['my_order']
         verbose_name = 'Բրենդ'
         verbose_name_plural = 'Բրենդներ'
 
@@ -59,7 +61,7 @@ class Category(MPTTModel):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slug_generator(self.name)
+            self.slug = slug_generator(self.name, self.__class__)
         super().save(*args, **kwargs)
 
     class MPTTMeta:
@@ -137,7 +139,7 @@ class Product(CustomMetaModel):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slug_generator(self.name)
+            self.slug = slug_generator(self.name, self.__class__)
         super().save(*args, **kwargs)
 
     class Meta:
