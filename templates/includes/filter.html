@@ -39,7 +39,7 @@
                                                     id="id_colors_{{ forloop.counter }}"
                                                     name="brands"
                                                     {% for k,v in request.GET.lists %}
-                                                        {{ k }} - {{ v }}
+                                                        {{ k }} - {{ v|urlencode }}
                                                         {% if brand.id in v and k == 'brands' %}
                                                     checked
                                                         {% endif %}
