@@ -20,8 +20,9 @@
                 </div>
                 <form method="get" class="filters-marani" id="allFilter"
                       onchange="filter()">
+                {{ request.resolver_match.kwargs.url_name }}
                     {% if request.resolver_match.kwargs.url_name != 'brand_details' %}
-                        {{ request.resolver_match.kwargs.url_name }}
+
                     {% if brands %}
                         <div class="filter-params">
                             <div class="filter-params-title">
