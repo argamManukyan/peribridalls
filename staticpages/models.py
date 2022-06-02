@@ -6,7 +6,7 @@ from core.utils import CustomModel, slug_generator
 class StaticPages(CustomModel):
     page_title = models.CharField(max_length=160, verbose_name="Էջի վերնագիր")
     text = RichTextUploadingField(verbose_name="Տեքստ")
-    slug = models.SlugField(unique=True, blank=True, max_length=200, null=True, verbose_name="Հղում")
+    slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="Հղում")
     my_order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name="Դասավորել")
 
     class Meta:
