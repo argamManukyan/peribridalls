@@ -39,9 +39,8 @@
                                                     id="id_brands_{{ forloop.counter }}"
                                                     name="brands"
                                                     {% for k,v in request.GET.lists %}
-                                                        {{ k }} --- {{ v }}
                                                         {% if brand.id in v and k == 'brands' %}
-                                                    checked
+                                                            {{ k }} -- {{ v }}
                                                         {% endif %}
                                                     {% endfor %}
                                             >
