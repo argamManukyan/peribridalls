@@ -53,7 +53,7 @@ def brand_details(request, slug):
     products = Product.objects.filter(brand=brand)
     page_obj = paginated_response(request, products)
 
-    if request.is_ajax():
+    if request.GET.keys():
         return show_filter_data(request, products)
 
     context = {
@@ -146,7 +146,7 @@ def category_details(request, slug):
     page_obj = paginated_response(request, products)
     categories = Category.objects.filter(parent=None)
 
-    if request.is_ajax():
+    if list(request.GET.keys()):
         return show_filter_data(request, products)
 
     context = {

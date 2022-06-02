@@ -5,7 +5,7 @@ from core.utils import CustomModel, CustomLogoField
 TEXT_LOCATION = [
     # ('catalog', 'Տեսականի'),
     # ('sale', 'Ակցիա'),
-    ('new', 'Նորույթ'),
+    # ('new', 'Նորույթ'),
     ('categories', 'Բաժինների էջ'),
     ('brands', 'Բրենդների էջ'),
     # ('search', 'Որոնում'),
