@@ -22,30 +22,32 @@ def my_url(value, field, urlencode=None):
 @register.filter(name='unique')
 def unique(qs):
     req = current_request()
-
+    cat_slug = None
     try:
         cat_slug = req.resolver_match.kwargs.get('slug')
-        if req.resolver_match.url_name in ['brand_list', 'brand_details']:
-            category = Brand.objects.get(slug__iexact=cat_slug)
-        else:
-            category = Category.objects.get(slug__iexact=cat_slug)
-        if isinstance(category, Category):
-            if category.is_leaf_node():
-                list_ids = [category.id]
+        if cat_slug:
+            if req.resolver_match.url_name in ['brand_list', 'brand_details']:
+                category = Brand.objects.get(slug__iexact=cat_slug)
             else:
-                list_ids = [i.id for i in category.get_descendants(include_self=True)]
-        else:
-            list_ids = [category.id]
+                category = Category.objects.get(slug__iexact=cat_slug)
+            if isinstance(category, Category):
+                if category.is_leaf_node():
+                    list_ids = [category.id]
+                else:
+                    list_ids = [i.id for i in category.get_descendants(include_self=True)]
+            else:
+                list_ids = [category.id]
 
     except Exception as e:
         pass
 
     qs_array = []
     num_array = []
-    if isinstance(category, Category):
-        qs = qs.filter(product__category__in=list_ids)
-    else:
-        qs = qs.filter(product__brand__in=list_ids)
+    if cat_slug:
+        if isinstance(category, Category):
+            qs = qs.filter(product__category__in=list_ids)
+        else:
+            qs = qs.filter(product__brand__in=list_ids)
 
     for i in qs:
         if i.value not in qs_array:
