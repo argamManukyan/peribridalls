@@ -209,12 +209,11 @@
                                                 {% for item in contact_details %}
                                                     <li class="align-items-center">
                                                     <span class="cont-a">
-                                                        <img src="
-                                                                {% if item.icon %}{{ item.icon.url }}{% else %}{% static 'img/icons/c-phone.svg' %}{% endif %}"
+                                                        <img src="{% if item.icon %}{{ item.icon.url }}{% else %}{% static 'img/icons/c-phone.svg' %}{% endif %}"
                                                              alt="Phone">
                                                     </span>
                                                         <span class="cont-b">
-                                                        <a href="{% if item.link %}{{ item.link }}{% else %}javascript: void(0){% endif %}">{{ item.text }}</a>
+                                                        <a href="{% if item.link %}{{ item.link }}{% else %}javascript: void(0){% endif %}">{{ item.text|safe }}</a>
                                                     </span>
                                                     </li>
                                                 {% endfor %}
