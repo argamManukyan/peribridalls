@@ -6,6 +6,10 @@ from django.conf.urls.static import static, settings
 import shop.views
 from wish.views import add_to_wish
 
+admin.site.site_header = 'Peri Bridals'                    # default: "Django Administration"
+admin.site.index_title = 'Peri Bridals'                 # default: "Site administration"
+admin.site.site_title = 'Peri Bridals'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path('add_to_wish/', add_to_wish, name='add_to_wish'),

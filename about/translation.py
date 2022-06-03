@@ -15,7 +15,7 @@ class AboutUsHomepageTrans(TranslationOptions):
 
 @register(AboutUsBanner)
 class AboutUsHomepageTrans(TranslationOptions):
-    fields = ['text', 'url']
+    fields = ['text']
 
 
 @register(OurAdvantages)

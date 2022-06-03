@@ -111,7 +111,7 @@
                                 <img src="{% if i.icon %}{{ i.icon.url }}{% else %}{% static 'img/icons/adv-1.svg' %}{% endif %}" alt="Peri Bridals">
                             </figure>
                             <div class="cation">
-                                <h4>{{ i.name }}</h4>
+                                <h4>{{ i.name|safe }}</h4>
                             </div>
                         </div>
                     </div>

@@ -22,6 +22,7 @@ class OurAdvantages(CustomModel):
     icon = CustomLogoField(blank=True)
     name = models.CharField(max_length=255, verbose_name="Նպատակի անուն")
     text = models.TextField(verbose_name="Նկարագրություն", blank=True, null=True)
+    my_order = models.PositiveIntegerField(default=0, verbose_name='Դասավորել')
 
     def __str__(self):
         return self.name
@@ -29,6 +30,7 @@ class OurAdvantages(CustomModel):
     class Meta:
         verbose_name = "Առավելություն"
         verbose_name_plural = "Մեր առավելությունները"
+        ordering = ['my_order']
 
 
 class AboutUs(CustomModel):
@@ -57,7 +59,7 @@ class AboutUsHomepage(CustomModel):
 class AboutUsBanner(CustomModel):
     image = CustomLogoField()
     text = RichTextUploadingField(verbose_name="Տեքստ", blank=True, null=True)
-    url = models.CharField(max_length=1000, blank=True, null=True)
+    # url = models.CharField(max_length=1000, blank=True, null=True)
 
     def __str__(self):
         return str(self.pk)

@@ -17,7 +17,7 @@ class AboutUsHomepageAdmin(SingleModelAdmin, TabbedDjangoJqueryTranslationAdmin)
 
 
 @admin.register(OurAdvantages)
-class OurAdvantagesAdmin(TabbedDjangoJqueryTranslationAdmin):
+class OurAdvantagesAdmin(SortableAdminMixin, TabbedDjangoJqueryTranslationAdmin):
 
     def get_icon(self, obj):
         if obj.icon:

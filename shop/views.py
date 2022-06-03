@@ -289,17 +289,20 @@ def search(request):
     qs = Blog.objects.all()
     qs1 = Brand.objects.all()
     qs2 = Product.objects.all()
+    qs3 = Category.objects.all()
     n = q
     if q not in ['', ' '] and q is not None:
         q = q.replace(' ', '-')
         qs = qs.filter(Q(name__icontains=q) | Q(slug__icontains=q)).distinct()
         qs1 = qs1.filter(Q(name__icontains=q) | Q(slug__icontains=q)).distinct()
         qs2 = qs2.filter(Q(name__icontains=q) | Q(slug__icontains=q)).distinct()
+        qs3 = qs3.filter(Q(name__icontains=q) | Q(slug__icontains=q)).distinct()
 
     queryset = []
     queryset.extend([i for i in qs])
     queryset.extend([i for i in qs1])
     queryset.extend([i for i in qs2])
+    queryset.extend([i for i in qs3])
 
     q = n if n is not None and n not in [" ", ""] else ''
     context = {

@@ -23,8 +23,7 @@
         </button>
     {% endif %}
     <figure>
-        <img src="
-                {% if item.main_image %}{{ item.main_image.url }}{% else %}{% static 'img/home-cat-1.jpg' %}{% endif %}"
+        <img src="{% if item.main_image %}{{ item.main_image.url }}{% else %}{% static 'img/home-cat-1.jpg' %}{% endif %}"
              alt="Product Name">
     </figure>
     <div class="home-cat-caption">
