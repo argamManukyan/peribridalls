@@ -199,7 +199,7 @@ def product_details(request, slug):
     product = get_object_or_404(Product, slug=slug)
     others = Product.objects.filter(Q(brand=product.brand)
                                     | Q(category=product.category),
-                                    ~Q(id=product.id)).distinct()
+                                    ~Q(id=product.id)).distinct()[:24]
 
     contact_details = ContactUsJoinUsData.objects.all()
 
@@ -214,7 +214,7 @@ def product_details(request, slug):
 
 def home_page(request):
     about_home: AboutUsHomepage = AboutUsHomepage.objects.last()
-    brands = Brand.objects.all()
+    brands = Brand.objects.all()[:6]
     posts = Blog.objects.order_by('-id')[:2]
     banner: AboutUsBanner = AboutUsBanner.objects.last()
     categories: Category = Category.objects.filter(parent=None)

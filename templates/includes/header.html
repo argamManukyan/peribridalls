@@ -11,7 +11,7 @@
                                 <img src="{% static 'img/icons/heart.svg' %}" alt="Wish List">
                                 <span class="in-cart-qty flex-content-center wishCount"
                                       id="wishCount">{{ wish_ids|length }}</span>
-                                <span class="h_txt">{% trans 'Wishlsit' %}</span>
+                                <span class="h_txt">{% trans 'Wishlist' %}</span>
                             </a>
                         </li>
                         <li>
@@ -45,14 +45,16 @@
                     </ul>
 
                     <ul class="mob-langs cutter align-items-center dl-none">
-                        {% if request.LANGUAGE_CODE == 'en' %}
+                        <!--{% if request.LANGUAGE_CODE == 'en' %}-->
                             <li><a href="javascript:void(0);" class="active">Eng</a></li>
-                            <li><a href="{{ site }}/hy{{ request.get_full_path }}">Հայ</a>
+
+                            <!--<li><a href="{{ site }}/hy{{ request.get_full_path }}">Հայ</a>
                             </li>
                             <li>
                                 <a href="{{ site }}/ru{{ request.get_full_path }}">Рус</a>
-                            </li>
-                        {% elif request.LANGUAGE_CODE == 'ru' %}
+                            </li>-->
+
+                            <!--{% elif request.LANGUAGE_CODE == 'ru' %}
                             <li><a href="javascript:void(0);" class="active">Рус</a></li>
                             <li><a href="{{ site }}/hy{{ request.get_full_path|cut:"/ru" }}">Հայ</a>
                             </li>
@@ -66,7 +68,7 @@
                             <li>
                                 <a href="{{ site }}/ru{{ request.get_full_path|cut:"/hy" }}">Рус</a>
                             </li>
-                        {% endif %}
+                        {% endif %}-->
                     </ul>
                     <div class="nav-offcanvas-menu">
                         <ul class="align-items-center">
@@ -132,16 +134,18 @@
                         <!-- Desktop wish end -->
 
                         <!-- Desktop langs -->
-                        {% if request.LANGUAGE_CODE == 'en' %}
+
+                        <!--{% if request.LANGUAGE_CODE == 'en' %}-->
+
                             <li class="web_langs md-none">
                                 <a href="javascript:void(0);" class="choose">
                                 <span class="menus align-items-center">
                                     <img src="{% static 'img/icons/eng.png' %}" class="flag_lang" alt="English">
-                                    <img src="{% static 'img/icons/menu-down.svg' %}" class="down-icon"
-                                         alt="choose">
+                                    <!--<img src="{% static 'img/icons/menu-down.svg' %}" class="down-icon"
+                                         alt="choose">-->
                                 </span>
                                 </a>
-                                <ul class="choose_lang">
+                                <!--<ul class="choose_lang">
                                     <li>
                                         <a href="{{ site }}/hy{{ request.get_full_path }}">
                                             <img src="{% static 'img/icons/arm.png' %}" class="flag_lang" alt="Հայերեն">
@@ -152,9 +156,10 @@
                                             <img src="{% static 'img/icons/rus.png' %}" class="flag_lang" alt="Русский">
                                         </a>
                                     </li>
-                                </ul>
+                                </ul>-->
                             </li>
-                        {% elif request.LANGUAGE_CODE == 'ru' %}
+
+                        <!--{% elif request.LANGUAGE_CODE == 'ru' %}
                             <li class="web_langs md-none">
                                 <a href="javascript:void(0);" class="choose">
                                 <span class="menus align-items-center">
@@ -198,7 +203,8 @@
                                     </li>
                                 </ul>
                             </li>
-                        {% endif %}
+                        {% endif %}-->
+
                         <!-- Desktop langs end -->
                         <li class="peri-tv md-none">
                             <a href="{% url 'peri_tv' %}" class="flex-content-center">

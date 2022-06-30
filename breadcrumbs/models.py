@@ -14,7 +14,8 @@ TEXT_LOCATION = [
     ('contacts', 'Կապ'),
     ('abouts', 'Մեր մասին'),
     ('faq', "Հաճախակի տրվող հարցեր"),
-    ('peri_tv', 'Peri TV')
+    ('peri_tv', 'Peri TV'),
+    ('wish_list', 'Ցանկությունների ցուցակ')
 ]
 
 

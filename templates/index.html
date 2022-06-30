@@ -241,7 +241,7 @@
 
                                     <div class="input-fields all-auth time-pick">
                                         <label for="time_of_pick">{% trans 'Select Time' %}</label>
-                                        <select name="time_of_pick" id="shippingtime" class="text-center">
+                                        <select name="time_of_pick" id="shippingtime">
                                             <option value="select" id="time_of_pick">{% trans 'Select' %}</option>
                                             {% for w_h in working_hours %}
                                             <option class="picktimes" value="{{ w_h.id }}">{{ w_h.name }}</option>

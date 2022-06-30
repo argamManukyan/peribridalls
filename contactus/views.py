@@ -23,7 +23,7 @@ def contact_us(request):
                 'first_name': form.first_name,
                 'phone1': form.phone1,
                 'email': form.email,
-                'message': form.message,
+                'message': form.messages,
             }
             SendMailThread(data).start()
         else:

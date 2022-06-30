@@ -8,6 +8,7 @@ from mptt.admin import DraggableMPTTAdmin
 from shop.models import Product, ProductImage, ProductFeature, Category, FilterValue, FilterField, Brand, Color
 
 ProductForm = select2_modelform(Product,  attrs={"width": "250px"})
+FilterFieldForm = select2_modelform(FilterField)
 
 
 class ProductImageInlineAdmin(SortableInlineAdminMixin, admin.TabularInline):
@@ -63,7 +64,7 @@ class ColorAdmin(SortableAdminMixin, TabbedDjangoJqueryTranslationAdmin):
 
 @admin.register(FilterField)
 class FilterFieldModelAdmin(TabbedDjangoJqueryTranslationAdmin):
-    pass
+    form = FilterFieldForm
 
 
 @admin.register(FilterValue)
