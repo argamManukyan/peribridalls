@@ -81,7 +81,7 @@ def brand_details(request, slug):
                                                  Q(productfeature__value__isnull=False)).distinct()
 
     colors = Color.objects.filter().distinct()
-    brands = Brand.objects.all()
+    brands = sorted(Brand.objects.all(), key=lambda x: x.id == brand.id, reverse=True)
     products = Product.objects.filter(brand=brand)
     page_obj = paginated_response(request, products)
 
