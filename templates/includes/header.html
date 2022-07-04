@@ -84,9 +84,8 @@
                                     {% endfor %}
                                 </ul>
                             </li>
-                        {{ request.get_full_path }}
+                        {{ request.build_absolute_uri }}
                             {% if header_links.count > 2 %}
-                                {{ request.get_full_path }}
                                 {% for head_item in header_links|slice:"2:" %}
                                     <li {% if request.get_full_path in head_link.url %}class="active"{% endif %}>
                                         <a href="{{ head_item.url }}">{{ head_item.name }}</a>
