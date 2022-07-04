@@ -66,7 +66,7 @@
 </footer>
 <div id="cookie_pridals" class="flex-center-between">
     <p class="cookie-msg">{% trans 'By continuing your browsing on this site, you agree to the use of cookies to improve your user experience and to make statistics of visits.' %}
-        <a href="#">{% trans 'Privacy Policy' %}</a></p>
+        <a href="{% url 'staticpages' slug='privacy-policy' %}">{% trans 'Privacy Policy' %}</a></p>
     <div class="cookie_butss">
         <button type="button" id="agreeCookie" class="chemical-butt">{% trans 'OK' %}</button>
     </div>
