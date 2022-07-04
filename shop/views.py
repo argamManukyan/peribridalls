@@ -224,12 +224,12 @@ def home_page(request):
 
     if request.method == 'POST':
         if form.is_valid():
-            f = form.save()
+            form = form.save()
             time_of_pick = None
             if request.POST.get('time_of_pick', None):
                 if request.POST.get('time_of_pick', None) != 'select':
                     time_of_pick = WorkingHours.objects.filter(id=request.POST.get('time_of_pick')).first()
-                    Bookings.objects.filter(id=f.id).update(time_of_pick_id=request.POST.get('time_of_pick'))
+                    Bookings.objects.filter(id=form.id).update(time_of_pick_id=request.POST.get('time_of_pick'))
             data = {
                 'action': 'booking',
                 'request': request,
@@ -292,7 +292,6 @@ def search(request):
     qs3 = Category.objects.all()
     n = q
     if q not in ['', ' '] and q is not None:
-        q = q.replace(' ', '-')
         qs = qs.filter(Q(name__icontains=q) | Q(slug__icontains=q)).distinct()
         qs1 = qs1.filter(Q(name__icontains=q) | Q(slug__icontains=q)).distinct()
         qs2 = qs2.filter(Q(name__icontains=q) | Q(slug__icontains=q)).distinct()

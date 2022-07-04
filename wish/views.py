@@ -4,6 +4,8 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+
+from breadcrumbs.models import BreadcrumbTexts
 from .models import *
 
 
@@ -23,7 +25,7 @@ def wishlist(request):
     paginator = Paginator(wish_items, 12)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
-
+    st_content = BreadcrumbTexts.objects.filter(location='wish_list').first()
     return render(request, 'wishlist.html', locals())
 
 

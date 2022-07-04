@@ -4,4 +4,4 @@ from breadcrumbs.models import BreadcrumbTexts
 
 @register(BreadcrumbTexts)
 class BreadcrumbTextsTranslation(TranslationOptions):
-    fields = ['breadcrumbs_text', 'page_title']
+    fields = ['breadcrumbs_text',]

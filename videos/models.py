@@ -16,7 +16,7 @@ class Video(models.Model):
     #     default=LOCATION_OF_VIDEO[0][0],
     #     verbose_name="Ընտրեք էջը"
     # )
-    video_url = models.URLField(verbose_name='Տեսահոլովակի հղում', blank=True)
+    iframe = models.TextField(verbose_name='Տեսահոլովակի iframe', blank=True)
     video_file = models.FileField(verbose_name='Տեսահոլովակ', blank=True)
     my_order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name='Դասավորել')
     # text = RichTextUploadingField(blank=True, null=True, verbose_name="Տեքստ")
@@ -28,3 +28,4 @@ class Video(models.Model):
         verbose_name = 'Տեսահոլովակ'
         verbose_name_plural = 'Տեսահոլովակ'
         ordering = ['my_order']
+

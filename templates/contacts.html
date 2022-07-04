@@ -31,8 +31,7 @@
                     <div class="col">
                         <div id="breadcrumbss" class="anothers-bread text-center">
                             <div class="tit-page bread-page">
-                                <h1>{% if st_content.page_title %}{{ st_content.page_title }}{% else %}
-                                    {% trans 'Contact Us' %}{% endif %}</h1>
+                                <h1>{% trans 'Contact Us' %}</h1>
                                 {% if st_content.breadcrumbs_text %}
                                     <p>{{ st_content.breadcrumbs_text|safe }}</p>{% endif %}
                             </div>
@@ -62,7 +61,7 @@
                     <ul class="calls-block">
                         {% for contacts in contactuspage.contactusjoinusdata_set.all %}
                             <li class="align-items-center">
-                                <a href="{% if contacts.url %}{{ contacts.url }}{% else %}javascript: void(0){% endif %}">
+                                <a href="{% if contacts.link %}{{ contacts.link }}{% else %}javascript: void(0){% endif %}">
                                     <img src="{% if contacts.icon %}{{ contacts.icon.url }}{% else %}{% static 'img/icons/c-location.svg' %}{% endif %}"
                                      alt="Location">
                                     <span>{{ contacts.text|safe }}</span>

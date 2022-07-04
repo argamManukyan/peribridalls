@@ -9,7 +9,7 @@ from core.utils import generic_context_processor
 def header_links(request):
 
     # trigger for check or uncheck activity for collections in header
-    url_name = resolve(request.get_full_path()).url_name
+    url_name = request.resolver_match.url_name
     check_collection = False
     if url_name in ['category_details', 'brand_details', 'product_list', 'brand_list']:
         check_collection = True

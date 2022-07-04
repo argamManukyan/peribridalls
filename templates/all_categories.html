@@ -30,8 +30,7 @@
                     <div class="col">
                         <div id="breadcrumbss" class="anothers-bread text-center">
                             <div class="tit-page bread-page">
-                                <h1>{% if st_content.page_title %}{{ st_content.page_title }}{% else %}
-                                    {% trans 'Categories' %}{% endif %}</h1>
+                                <h1>{% trans 'Categories' %}</h1>
                                 {% if st_content.breadcrumbs_text %}
                                     <p>{{ st_content.breadcrumbs_text|safe }}</p>{% endif %}
                             </div>

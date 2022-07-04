@@ -13,7 +13,7 @@ def contact_us(request):
     contactuspage: ContactUsPage = ContactUsPage.objects.first()
     if request.method == 'POST':
         if form.is_valid():
-            form.save()
+            form = form.save()
             messages.add_message(request, messages.SUCCESS,
                                  'Your message has been successfully sent.<br>Our manager will contact you soon.')
 

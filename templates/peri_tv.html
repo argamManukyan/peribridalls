@@ -30,7 +30,7 @@
                     <div class="col">
                         <div id="breadcrumbss" class="anothers-bread text-center">
                             <div class="tit-page bread-page">
-                                <h1>{% if st_content.page_title %}{{ st_content.page_title }}{% else %}{% trans 'Peri TV' %}{% endif %}</h1>
+                                <h1>{% trans 'Peri TV' %}</h1>
                                 {% if st_content.breadcrumbs_text %}<p>{{ st_content.breadcrumbs_text|safe }}</p>{% endif %}
                             </div>
                             <nav id="breadcrumbs" class="flex-content-center">
@@ -57,10 +57,14 @@
                     {% for video in page_obj %}
                     <div class="col col-2">
                         <div class="tv-block">
-                            <iframe width="560" height="315" src="{% if video.video_url %}{{ video.video_url }}{% else %}{{ video.video_file.url }}{% endif %}"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
+
+                            {% if video.file %}
+                            <video id="video_bg" muted="" loop="" autoplay="" playsinline="">
+                                 <source src="{{ video.video_file.url }}" type="video/mp4">
+                            </video>
+                            {% elif video.iframe %}
+                            {{ video.iframe|safe }}
+                            {% endif %}
                         </div>
                     </div>
                     {% endfor %}
