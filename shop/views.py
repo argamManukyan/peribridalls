@@ -1,3 +1,5 @@
+import random
+
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -197,9 +199,8 @@ def category_details(request, slug):
 
 def product_details(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    others = Product.objects.filter(Q(brand=product.brand)
-                                    | Q(category=product.category),
-                                    ~Q(id=product.id)).distinct()[:24]
+    others = Product.objects.filter(~Q(id=product.id)).distinct()[:24]
+    random.shuffle(others)
 
     contact_details = ContactUsJoinUsData.objects.all()
 
