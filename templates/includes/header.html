@@ -73,7 +73,7 @@
                     <div class="nav-offcanvas-menu">
                         <ul class="align-items-center">
                             {% for head_link in header_links|slice:":2" %}
-                                <li {% if request.get_absolute_url in head_link.url %}class="active"{% endif %}><a
+                                <li {% if request.get_full_path in head_link.url %}class="active"{% endif %}><a
                                         href="{{ head_link.url }}">{{ head_link.name }}</a></li>
                             {% endfor %}
                             <li {% if header_categories %}class="uWithSubmenu {% if check_collection %}active{% endif %}"{% endif %}>
@@ -86,7 +86,7 @@
                             </li>
                             {% if header_links.count > 2 %}
                                 {% for head_item in header_links|slice:"2:" %}
-                                    <li {% if request.get_absolute_url in head_link.url %}class="active"{% endif %}>
+                                    <li {% if request.get_full_path in head_link.url %}class="active"{% endif %}>
                                         <a href="{{ head_item.url }}">{{ head_item.name }}</a>
                                     </li>
                                 {% endfor %}
