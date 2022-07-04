@@ -86,7 +86,7 @@
                             </li>
                             {% if header_links.count > 2 %}
                                 {% for head_item in header_links|slice:"2:" %}
-                                    <li {% if request.build_absolute_uri == head_link.url %}class="active"{% endif %}>
+                                    <li {% if request.build_absolute_uri == head_item.url %}class="active"{% endif %}>
                                         <a href="{{ head_item.url }}">{{ head_item.name }}</a>
                                     </li>
                                 {% endfor %}
