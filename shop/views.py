@@ -199,8 +199,7 @@ def category_details(request, slug):
 
 def product_details(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    others = Product.objects.filter(~Q(id=product.id)).distinct()[:24]
-    random.shuffle(others)
+    others = Product.objects.filter(~Q(id=product.id)).order_by('?')[:24]
 
     contact_details = ContactUsJoinUsData.objects.all()
 
