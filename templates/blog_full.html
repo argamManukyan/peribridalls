@@ -39,10 +39,12 @@
                                     <li class="b-list-item">
                                         <a href="{% url 'blog_list' %}" class="b-list-link">{% trans 'Blog' %}</a>
                                     </li>
+                                    {% if post.category %}
                                     <span class="bread-arrow">→</span>
                                     <li class="b-list-item">
                                         <a href="{{ post.category.get_absolute_url }}" class="b-list-link">{{ post.category.name }}</a>
                                     </li>
+                                    {% endif %}
                                     <span class="bread-arrow">→</span>
                                     <li class="b-list-item">
                                         <span>{{ post.name|capfirst }}</span>
