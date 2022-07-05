@@ -221,9 +221,9 @@ CKEDITOR_CONFIGS = {
 
 PAGE_SIZE_FOR_BLOG = 8
 
-EMAIL_HOST = config('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_PORT = config('EMAIL_PORT', 587)
-EMAIL_HOST_USER = config('EMAIL', '')
-EMAIL_HOST_PASSWORD = config('EMAIL_PASS', '')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', True)
+EMAIL_HOST = 'smtp.yandex.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'info@peribridals.am'
+EMAIL_HOST_PASSWORD = 'PeriBridals446237'
+EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
