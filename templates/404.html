@@ -44,11 +44,11 @@
                         <div class="col">
                             <ul class="breadcrumbs-list align-items-center">
                                 <li class="b-list-item">
-                                    <a href="#" class="b-list-link">Home</a>
+                                    <a href="{% url 'home_page' %}" class="b-list-link">{% trans 'Home' %}</a>
                                 </li>
                                 <span class="bread-arrow">→</span>
                                 <li class="b-list-item">
-                                    <span>Page Not Found</span>
+                                    <span>{% trans 'Page Not Found' %}</span>
                                 </li>
                             </ul>
                         </div>
@@ -67,9 +67,9 @@
                                 <div class="error-container">
                                     <div class="error-page">
                                         <h2 class="error-title flex-content-center">404</h2>
-                                        <h5>Page Not Found</h5>
-                                        <p>Check the accuracy of the URL.<br> If you are confident in your actions, contact us. <b> info@peribridals.am</b></p>
-                                        <div><a href="#" class="button normal dark">Go To Home</a></div>
+                                        <h5>{% trans 'Page Not Found' %}</h5>
+                                        <p>{% trans 'Check the accuracy of the URL.' %}<br>{% trans 'If you are confident in your actions, contact us.' %} <b> info@peribridals.am</b></p>
+                                        <div><a href="{% url 'home_page' %}" class="button normal dark">{% trans 'Go To Home' %}</a></div>
                                     </div>
                                 </div>
                             </div>

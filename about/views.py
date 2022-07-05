@@ -9,7 +9,7 @@ def about_us(request):
     about: AboutUs = AboutUs.objects.first()
     advantages = OurAdvantages.objects.all()
     banner: AboutUsBanner = AboutUsBanner.objects.last()
-    st_content: BreadcrumbTexts = BreadcrumbTexts.objects.filter(location='about').first()
+    st_content: BreadcrumbTexts = BreadcrumbTexts.objects.filter(location='abouts').first()
     posts = Blog.objects.order_by('?')[:2]
     context = {
         'about': about,
