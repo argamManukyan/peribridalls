@@ -35,6 +35,7 @@ class CustomModel(models.Model):
     class Meta:
         abstract = True
 
+
 class CustomMetaModel(CustomModel):
     meta_title = models.CharField(max_length=255, blank=True, null=True)
     meta_description = models.TextField(max_length=300, blank=True, null=True)

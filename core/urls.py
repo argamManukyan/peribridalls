@@ -18,15 +18,15 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    path('index/faq/', include('faq.urls')),
-    path('index/contact-us/', include('contactus.urls')),
-    path('index/peri-tv/', include('videos.urls')),
-    path('index/', include('blog.urls')),
-    path('index/', include('shop.urls', namespace='shop')),
-    path('index/', include('about.urls')),
-    path('index/', include('wish.urls')),
-    path('index/', include('gallery.urls')),
-    path('index/', include('staticpages.urls')),
+    path('faq/', include('faq.urls')),
+    path('contact-us/', include('contactus.urls')),
+    path('peri-tv/', include('videos.urls')),
+    path('', include('blog.urls')),
+    path('', include('shop.urls', namespace='shop')),
+    path('', include('about.urls')),
+    path('', include('wish.urls')),
+    path('', include('gallery.urls')),
+    path('', include('staticpages.urls')),
     prefix_default_language=False
 )
 
