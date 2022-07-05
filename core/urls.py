@@ -2,7 +2,6 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf.urls.static import static, settings
-from django.conf.urls import handler404, handler500
 from wish.views import add_to_wish
 
 admin.site.site_header = 'Peri Bridals'  # default: "Django Administration"
