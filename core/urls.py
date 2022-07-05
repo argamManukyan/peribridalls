@@ -32,5 +32,5 @@ if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404 = 'shop.views.page_not_found_view'
-handler500 = 'shop.views.server_error_view'
+handler404 = 'shop.views.custom_page_not_found_view'
+handler500 = 'shop.views.custom_error_view'
