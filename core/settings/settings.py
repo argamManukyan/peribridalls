@@ -25,6 +25,9 @@ SECRET_KEY = config('SESSION_KEY', 'testtesttest')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', True)
 
+CAPTCHA_PUBLIC = config('CAPTCHA_PUBLIC')
+CAPTCHA_SECRET = config('CAPTCHA_SECRET')
+
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
 
 # Application definition

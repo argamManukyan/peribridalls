@@ -10,6 +10,7 @@
           content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
     <title>{% trans 'Contacts' %} | {{ request.get_host|capfirst }}</title>
     <meta name="Description" content="">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'css/pb_color.css' %}">
     <link rel="stylesheet" href="{% static 'css/pb_style.css' %}">
@@ -102,7 +103,10 @@
                                 <textarea name="messages" id="message-type" rows="7"
                                           placeholder="{% trans 'Message' %} ... "></textarea>
                             </div>
-
+                            <div class="input-fields">
+                                <div class="g-recaptcha" data-sitekey="{{ captcha_public }}"></div>
+                                <br/>
+                            </div>
                             <div class="input-fields">
                                 <div class="butt-send-contact flex-content-center">
                                     <button type="submit" class="button big dark"
