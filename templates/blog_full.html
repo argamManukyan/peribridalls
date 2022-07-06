@@ -19,8 +19,8 @@
    <div id="root">
     {% include 'includes/header.html' %}
     <!-- Main content -->
-    <main id="content" class="about-us">
-       
+    <main id="content" class="blfull">
+
         <!-- Breadcrumbs -->
         <section class="bread-bg no-p" style="background-image:url({% if post.image %}{{ post.image.url }}{% else %}{% static 'img/breadcrumbs.jpg' %}{% endif %})">
                <div class="cnt">
@@ -57,13 +57,13 @@
                </div>
            </section>
         <!-- Breadcrumbs end -->
-        
-                      
+
+
         <!-- Ck editor text -->
         <div class="all-paragraphs-styles">
             <div class="cnt">
                 <div class="row">
-                  
+
                    <div class="col">
                        <div class="post-details align-items-center">
                            <div class="post-date align-items-center">
@@ -75,7 +75,7 @@
                            </div>
                        </div>
                    </div>
-                   
+
                     <div class="col">{% if post.large_text %}{{ post.large_text|safe }}{% endif %}</div>
                 </div>
             </div>
@@ -93,10 +93,11 @@
                             </h3>
                         </div>
                    </div>
+                   {% for blog in related_posts %}
                    <div class="col col-2">
-                       {% include 'includes/blog.html' %}
+                       {% include 'includes/blog.html' with post=blog %}
                    </div>
-                   
+                   {% endfor %}
                    <div class="col">
                        <div class="see-all-butt">
                            <a href="{% url 'blog_list' %}" class="button normal trans black">{% trans 'See All' %}
